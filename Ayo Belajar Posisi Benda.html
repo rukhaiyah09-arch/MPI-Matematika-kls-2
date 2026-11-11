@@ -1,0 +1,1255 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Ayo Belajar Posisi Benda</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Chewy&family=Fredoka:wght@500;600;700&family=Grandstander:wght@700;800&family=Lilita+One&family=Luckiest+Guy&family=Sniglet:wght@800&display=swap" rel="stylesheet">
+<style>
+/* Layout: satu kartu aplikasi di tengah. Gambar adegan selalu di atas, kata-kata di bawahnya, tombol besar untuk jari anak. */
+:root{
+  --bg:#E4F3FF; --card:#FFFFFF; --ink:#1D2B4A; --muted:#556589; --line:#C9E0F4;
+  --blue:#2F7BEF; --blue-ink:#FFFFFF; --sun:#FFC83D; --sun-ink:#4A3300;
+  --green:#2FB26F; --green-bg:#DDF5E8; --coral:#F2606A; --coral-bg:#FFE4E6; --purple:#7B5BE6;
+  --sky1:#BFE6FF; --grass:#8ED89B; --sea:#5BB8F0; --wood:#B9772F; --wood2:#E0A04A;
+  --wall:#B97B4B; --wall2:#AA6D40; --floor:#8A5530; --floor2:#734422; --board:#2F5D4A; --chalk:#F4F7EE; --blk-ink:#14213D;
+  --pw1:#FFE0F0; --pw2:#D5ECFF; --pf1:#FFCB6B; --pf2:#FFB347;
+  --font-display:"Chewy","Trebuchet MS",system-ui,sans-serif;
+  --font-body:"Fredoka","Trebuchet MS",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1830; --card:#1A2646; --ink:#EEF3FF; --muted:#A8B7D8; --line:#2E3E66;
+    --blue:#6AA3FF; --blue-ink:#0B1530; --sun:#FFD25E; --sun-ink:#3A2900;
+    --green:#4CD08C; --green-bg:#12382A; --coral:#FF8189; --coral-bg:#44202A; --purple:#A58EFF;
+    --sky1:#24457D; --grass:#2E7D4F; --sea:#2A78B8; --wood:#9A6224; --wood2:#C98A3A;
+  --wall:#4B3020; --wall2:#42291A; --floor:#34200F; --floor2:#2A1909; --board:#1F4034; --chalk:#E8EEE2; --blk-ink:#0B1530;
+  --pw1:#3B2B63; --pw2:#223A74; --pf1:#7A4E1D; --pf2:#6A4217;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1830; --card:#1A2646; --ink:#EEF3FF; --muted:#A8B7D8; --line:#2E3E66;
+  --blue:#6AA3FF; --blue-ink:#0B1530; --sun:#FFD25E; --sun-ink:#3A2900;
+  --green:#4CD08C; --green-bg:#12382A; --coral:#FF8189; --coral-bg:#44202A; --purple:#A58EFF;
+  --sky1:#24457D; --grass:#2E7D4F; --sea:#2A78B8; --wood:#9A6224; --wood2:#C98A3A;
+  --wall:#4B3020; --wall2:#42291A; --floor:#34200F; --floor2:#2A1909; --board:#1F4034; --chalk:#E8EEE2; --blk-ink:#0B1530;
+  --pw1:#3B2B63; --pw2:#223A74; --pf1:#7A4E1D; --pf2:#6A4217;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background-color:var(--wall);background-image:repeating-linear-gradient(90deg,transparent 0 118px,var(--wall2) 118px 122px);color:var(--ink);font-family:var(--font-body);font-weight:500;font-size:17px;line-height:1.5;font-synthesis:none}
+button,input{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--font-display);font-weight:800;line-height:1.1;margin:0;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:920px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 28px;display:flex;flex-direction:column;gap:16px;min-height:100%;position:relative;z-index:1}
+
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;background:var(--card);border:3px solid var(--line);border-radius:20px;padding:10px 16px}
+.brand{font-family:var(--font-display);font-weight:800;font-size:22px;color:var(--blue)}
+.steps{display:flex;flex-wrap:wrap;gap:6px}
+.steps button{min-height:40px;padding:0 14px;border-radius:99px;border:2px solid var(--line);background:var(--card);cursor:pointer;font-weight:800;font-size:14px;color:var(--muted)}
+.steps button.on{background:var(--blue);border-color:var(--blue);color:var(--blue-ink)}
+.steps button.done{border-color:var(--green);color:var(--ink)}
+:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
+
+main{min-width:0}
+.slide{background:var(--card);border:3px solid var(--line);border-radius:28px;padding:clamp(16px,4vw,32px);display:flex;flex-direction:column;gap:16px;min-width:0}
+.slide h2{font-size:clamp(26px,5.5vw,36px)}
+.lead{color:var(--muted);font-size:18px}
+.tag{display:inline-block;align-self:flex-start;background:var(--sun);color:var(--sun-ink);font-weight:800;font-size:14px;padding:4px 14px;border-radius:99px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 24px;border:0;border-radius:16px;background:var(--blue);color:var(--blue-ink);font-weight:800;font-size:18px;cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.2);transition:transform .08s,box-shadow .08s}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(0,0,0,.2)}
+.btn.alt{background:var(--card);color:var(--ink);border:2px solid var(--line);box-shadow:0 5px 0 var(--line)}
+.btn.sun{background:var(--sun);color:var(--sun-ink)}
+.btn.go{background:linear-gradient(90deg,var(--coral),var(--sun),var(--green));color:var(--blk-ink);font-size:clamp(19px,5vw,24px);min-height:60px;padding:0 34px;animation:wig 1.8s ease-in-out infinite}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.nav{display:flex;justify-content:space-between;gap:12px}
+.nav .btn{flex:0 1 auto}
+
+/* adegan gambar */
+.scene{position:relative;aspect-ratio:5/3;max-width:100%;container-type:inline-size;border-radius:20px;overflow:hidden;border:3px solid var(--line);background:linear-gradient(var(--sky1) 0 70%,var(--grass) 70%)}
+.scene.sea{background:linear-gradient(var(--sky1) 0 38%,var(--sea) 38%)}
+.it{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:.6cqw;line-height:1;text-align:center}
+.em svg,.em2 svg,.flt svg{display:block;width:1em;height:1em;overflow:visible}
+.em{display:block;font-size:calc(var(--s,15)*1cqw);line-height:1;animation:pop .5s cubic-bezier(.3,1.6,.5,1) both;animation-delay:calc(var(--n,0)*90ms)}
+.lb{font-weight:800;font-size:clamp(11px,3.3cqw,15px);line-height:1;color:var(--ink);background:color-mix(in srgb,var(--card) 82%,transparent);padding:3px 8px;border-radius:99px;white-space:nowrap}
+.box{position:absolute;transform:translate(-50%,-50%);width:calc(var(--w)*1cqw);height:calc(var(--h)*1cqw)}
+.crate-back{background:var(--wood);border-radius:2cqw}
+.crate-front{background:var(--wood2);border-radius:0 0 2cqw 2cqw;display:grid;place-items:center}
+.tabletop{background:var(--wood2);border-radius:1cqw;box-shadow:0 1cqw 0 var(--wood)}
+.leg{background:var(--wood);border-radius:1cqw}
+.zone{position:absolute;transform:translate(-50%,-50%);width:15cqw;height:15cqw;border-radius:50%;border:3px dashed var(--blue);background:color-mix(in srgb,var(--blue) 14%,transparent);color:var(--blue);font-family:var(--font-display);font-weight:800;font-size:7cqw;line-height:1;cursor:pointer;z-index:3;padding:0;animation:pulse 1.8s ease-in-out infinite}
+.slide.locked .zone{pointer-events:none;animation:none;opacity:.35}
+.mover{transition:left .6s cubic-bezier(.5,1.4,.6,1),top .6s cubic-bezier(.5,1.4,.6,1);pointer-events:none}
+.mover .em{animation:none}
+
+.sentence{font-family:var(--font-display);font-weight:800;font-size:clamp(24px,5vw,34px);line-height:1.2}
+.sentence b{color:var(--blue);background:color-mix(in srgb,var(--sun) 55%,transparent);border-radius:8px;padding:0 6px}
+.tip{background:color-mix(in srgb,var(--sun) 28%,var(--card));border:2px solid var(--sun);border-radius:16px;padding:12px 16px;font-weight:800}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-height:48px;padding:0 18px;border-radius:14px;border:2px solid var(--line);background:var(--card);font-weight:800;cursor:pointer}
+.chip.on{background:var(--blue);border-color:var(--blue);color:var(--blue-ink)}
+
+/* sampul */
+.cover{position:relative;overflow:hidden;align-items:center;text-align:center;gap:18px;border-color:var(--purple);padding-top:clamp(30px,6vw,46px);padding-bottom:clamp(30px,6vw,46px);
+  background:
+    radial-gradient(circle at 3% 31%,var(--coral) 0 5px,transparent 6px),
+    radial-gradient(circle at 93% 33%,var(--green) 0 6px,transparent 7px),
+    radial-gradient(circle at 5% 52%,var(--sun) 0 6px,transparent 7px),
+    radial-gradient(circle at 95% 60%,var(--purple) 0 5px,transparent 6px),
+    radial-gradient(circle at 12% 78%,var(--blue) 0 5px,transparent 6px),
+    radial-gradient(circle at 89% 86%,var(--coral) 0 6px,transparent 7px),
+    linear-gradient(180deg,color-mix(in srgb,var(--sky1) 75%,var(--card)) 0%,color-mix(in srgb,var(--sun) 24%,var(--card)) 50%,color-mix(in srgb,var(--coral) 20%,var(--card)) 100%)}
+.cover::before,.cover::after{content:"";position:absolute;left:0;right:0;height:14px;background:linear-gradient(90deg,var(--coral) 0 20%,var(--sun) 20% 40%,var(--green) 40% 60%,var(--blue) 60% 80%,var(--purple) 80%)}
+.cover::before{top:0}.cover::after{bottom:0}
+.cover>*{max-width:100%}
+.cover .ident{align-self:stretch;text-align:left}
+.cover .field{align-items:center;align-self:stretch}
+.cover .field input{border:3px solid var(--blue);box-shadow:0 4px 0 color-mix(in srgb,var(--blue) 35%,transparent)}
+.cover .tag{align-self:center;background:linear-gradient(90deg,var(--sun),var(--green));color:var(--blk-ink);font-size:15px;padding:5px 18px;box-shadow:0 3px 0 rgba(0,0,0,.18)}
+.cover h1{display:flex;flex-direction:column;align-items:center;gap:12px;font-size:inherit}
+.ribbon{display:inline-block;background:var(--coral);color:var(--blk-ink);font-family:var(--font-display);font-weight:800;font-size:clamp(20px,5.5vw,30px);line-height:1.2;padding:4px 24px;border-radius:12px;transform:rotate(-3deg);box-shadow:0 4px 0 rgba(0,0,0,.22)}
+.word{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(4px,1.2vw,8px)}
+.blk{display:grid;place-items:center;width:clamp(40px,11.5vw,72px);aspect-ratio:1;border-radius:16%;background:var(--c);color:var(--blk-ink);font-family:var(--font-display);font-weight:800;font-size:clamp(28px,8.5vw,54px);line-height:1;box-shadow:inset 0 -5px 0 rgba(0,0,0,.18),0 6px 0 rgba(0,0,0,.22);transform:rotate(var(--r));animation:hop 2.4s ease-in-out infinite;animation-delay:calc(var(--n)*110ms)}
+.flt{position:absolute;font-style:normal;font-size:clamp(40px,11vw,60px);line-height:1;pointer-events:none;animation:bob 3s ease-in-out infinite}
+.twk{position:absolute;font-style:normal;font-size:clamp(20px,5vw,30px);line-height:1;pointer-events:none;animation:twk 2s ease-in-out infinite}
+.mascots{display:grid;grid-template-columns:repeat(3,auto);gap:clamp(6px,3vw,24px);align-items:end;justify-items:center;justify-content:center;align-self:stretch;padding:6px 8px 0;border-radius:24px 24px 0 0;
+  background:
+    radial-gradient(circle at 9% 90%,var(--coral) 0 4px,transparent 5px),
+    radial-gradient(circle at 27% 82%,var(--sun) 0 4px,transparent 5px),
+    radial-gradient(circle at 72% 88%,var(--blue) 0 4px,transparent 5px),
+    radial-gradient(circle at 92% 81%,var(--purple) 0 4px,transparent 5px),
+    radial-gradient(ellipse 100% 44% at 50% 100%,var(--grass) 0 98%,transparent 100%)}
+.mc{display:flex;flex-direction:column;align-items:center;gap:12px}
+.mc .em2{display:block;font-size:clamp(66px,21vw,112px);line-height:1;animation:bob 2.2s ease-in-out infinite}
+.mc:nth-child(2) .em2{animation-delay:.3s;font-size:clamp(78px,25vw,132px)}.mc:nth-child(3) .em2{animation-delay:.6s}
+.bub{position:relative;background:var(--card);border:3px solid var(--ink);border-radius:16px;padding:4px 10px;font-weight:800;font-size:clamp(12px,3.4vw,15px);line-height:1.2;max-width:120px}
+.bub::after{content:"";position:absolute;left:50%;bottom:-9px;width:12px;height:12px;background:var(--card);border-right:3px solid var(--ink);border-bottom:3px solid var(--ink);transform:translateX(-50%) rotate(45deg)}
+.ident{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.ident div{--k:var(--blue);background:color-mix(in srgb,var(--k) 20%,var(--card));border:3px solid var(--k);border-radius:16px;padding:10px 14px;min-width:0}
+.ident div:nth-child(2){--k:var(--green)}.ident div:nth-child(3){--k:var(--coral)}.ident div:nth-child(4){--k:var(--purple)}
+.ident small{display:block;color:var(--ink);opacity:.78;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-weight:800}
+.field input,.ans{min-height:52px;border-radius:14px;border:2px solid var(--line);background:var(--card);padding:0 16px;font-size:20px;font-weight:800;width:100%;max-width:420px}
+
+.goals{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.goal{border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:6px;background:color-mix(in srgb,var(--c) 14%,var(--card));border:2px solid color-mix(in srgb,var(--c) 45%,var(--card));min-width:0}
+.goal .ic{font-size:36px;line-height:1}
+.goal h3{font-size:21px}
+.big{font-family:var(--font-display);font-weight:800;font-size:clamp(22px,4.6vw,30px);line-height:1.25;background:color-mix(in srgb,var(--sun) 30%,var(--card));border:3px solid var(--sun);border-radius:20px;padding:16px 20px}
+
+/* kuis */
+.qhead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px}
+.bar{height:14px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--green);border-radius:99px;transition:width .4s}
+.blank{display:inline-block;min-width:3.2em;text-align:center;border-bottom:4px solid var(--blue);color:var(--blue);padding:0 6px}
+.blank.ok{color:var(--green);border-color:var(--green)}.blank.no{color:var(--coral);border-color:var(--coral)}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.opt{min-height:56px;border-radius:16px;border:3px solid var(--line);background:var(--card);font-weight:800;font-size:19px;cursor:pointer;padding:6px 12px}
+.opt:hover{border-color:var(--blue)}
+.opt.ok{background:var(--green-bg);border-color:var(--green)}
+.opt.no{background:var(--coral-bg);border-color:var(--coral)}
+.opt:disabled{cursor:default}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.fb{border-radius:18px;padding:14px 18px;display:flex;flex-direction:column;gap:6px;border:2px solid var(--line)}
+.fb.ok{background:var(--green-bg);border-color:var(--green)}
+.fb.no{background:var(--coral-bg);border-color:var(--coral)}
+.fb.hint{border-style:dashed}
+.fb .mot{font-weight:800}
+.cmd{font-family:var(--font-display);font-weight:800;font-size:clamp(22px,4.6vw,30px);line-height:1.2}
+.cmd b{color:var(--blue)}
+
+/* hasil */
+.score{display:flex;flex-wrap:wrap;align-items:center;gap:6px 20px}
+.score .num{font-family:var(--font-display);font-weight:800;font-size:clamp(52px,12vw,84px);line-height:1;color:var(--blue)}
+.stars{font-size:clamp(28px,7vw,40px);letter-spacing:2px;line-height:1}
+.dots{display:flex;flex-wrap:wrap;gap:8px}
+.dots span{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-weight:800;border:2px solid var(--line)}
+.dots .y{background:var(--green-bg);border-color:var(--green)}.dots .n{background:var(--coral-bg);border-color:var(--coral)}
+.feel{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.feel button{display:flex;flex-direction:column;align-items:center;gap:4px;border-radius:18px;border:3px solid var(--line);background:var(--card);padding:12px 8px;font-weight:800;cursor:pointer;min-height:100px}
+.feel button .e{font-size:38px;line-height:1}
+.feel button.on{border-color:var(--blue);background:color-mix(in srgb,var(--blue) 14%,var(--card))}
+.checks{display:flex;flex-direction:column;gap:8px}
+.checks button{display:flex;align-items:center;gap:12px;min-height:52px;border-radius:14px;border:2px solid var(--line);background:var(--card);padding:6px 14px;text-align:left;font-weight:800;cursor:pointer}
+.checks button .bx{flex:none;width:30px;height:30px;border-radius:8px;border:3px solid var(--blue);display:grid;place-items:center;color:var(--blue-ink);font-size:18px}
+.checks button.on .bx{background:var(--green);border-color:var(--green)}
+
+/* ruang kelas: dinding coklat, lantai kayu, benda-benda kelas */
+.room{position:fixed;inset:0;z-index:0;pointer-events:none}
+.floorfix{position:absolute;left:0;right:0;bottom:0;height:11vh;min-height:64px;background:repeating-linear-gradient(90deg,var(--floor) 0 90px,var(--floor2) 90px 93px);border-top:8px solid var(--floor2)}
+.side{display:none;position:absolute;top:18vh;flex-direction:column;gap:5vh;font-size:60px;line-height:1}
+.side span{display:block;animation:bob 3.4s ease-in-out infinite}
+.side span:nth-child(2){animation-delay:.6s}.side span:nth-child(3){animation-delay:1.2s}
+.side.l{right:calc(50% + 480px)}
+.side.r{left:calc(50% + 480px)}
+@media (min-width:1160px){.side{display:flex}}
+.roomtop{display:flex;flex-direction:column;gap:8px}
+.wallrow{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.wo{flex:none;font-size:clamp(30px,8vw,46px);line-height:1}
+.chalk{flex:1 1 auto;max-width:360px;min-width:0;background:var(--board);color:var(--chalk);border:6px solid var(--floor2);border-radius:8px;padding:6px 12px;text-align:center;font-family:var(--font-display);font-weight:800;line-height:1.1;box-shadow:inset 0 0 12px rgba(0,0,0,.28)}
+.chalk b{display:block;font-size:clamp(16px,4.4vw,22px)}
+.chalk span{font-size:clamp(13px,3.6vw,17px);opacity:.92}
+.shelf{display:flex;justify-content:space-around;gap:6px;border-bottom:8px solid var(--floor2);padding:0 6px 2px;font-size:clamp(26px,7vw,38px);line-height:1}
+.roomfloor{display:flex;justify-content:space-around;align-items:flex-end;gap:6px;background:repeating-linear-gradient(90deg,var(--floor) 0 70px,var(--floor2) 70px 73px);border-radius:18px;padding:8px 12px;font-size:clamp(30px,8vw,44px);line-height:1}
+.roomfloor span{display:block;animation:bob 3s ease-in-out infinite}
+.roomfloor span:nth-child(2n){animation-delay:.5s}.roomfloor span:nth-child(3n){animation-delay:1s}
+/* font khusus tiap menu */
+#stage[data-m="0"]{--font-display:"Chewy","Trebuchet MS",system-ui,sans-serif}
+#stage[data-m="1"]{--font-display:"Sniglet","Trebuchet MS",system-ui,sans-serif}
+#stage[data-m="2"]{--font-display:"Bubblegum Sans","Trebuchet MS",system-ui,sans-serif}
+#stage[data-m="3"]{--font-display:"Luckiest Guy","Trebuchet MS",system-ui,sans-serif}
+#stage[data-m="4"]{--font-display:"Lilita One","Trebuchet MS",system-ui,sans-serif}
+#stage[data-m="5"]{--font-display:"Grandstander","Trebuchet MS",system-ui,sans-serif}
+#stage[data-m="3"] h2,#stage[data-m="3"] .cmd{letter-spacing:.03em}
+[hidden]{display:none!important}
+
+/* ruang pesta untuk menu Main */
+.scene.party{background:radial-gradient(circle,rgba(255,255,255,.5) 0 3px,transparent 4px) 0 0/26px 26px,linear-gradient(180deg,var(--pw1) 0,var(--pw2) 70%,transparent 70%),repeating-linear-gradient(90deg,var(--pf1) 0 12%,var(--pf2) 12% 24%)}
+.pickrow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.pickbtn{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;min-height:132px;border-radius:20px;border:3px solid var(--line);background:var(--card);padding:10px 6px;font-weight:700;font-size:16px;line-height:1.2;cursor:pointer;transition:transform .12s,border-color .12s}
+.pickbtn:hover{transform:translateY(-3px);border-color:var(--blue)}
+.pickbtn .pe{display:block;font-size:clamp(52px,15vw,78px);line-height:1}
+.pickbtn .pe svg{display:block;width:1em;height:1em;overflow:visible}
+.pickbtn.ok{background:var(--green-bg);border-color:var(--green)}
+.pickbtn.no{background:var(--coral-bg);border-color:var(--coral);opacity:.55}
+.pickbtn:disabled{cursor:default;transform:none}
+/* anak SD berseragam merah putih */
+.kid{display:block;font-size:clamp(54px,14vw,84px);line-height:1;animation:bob 2.6s ease-in-out infinite}
+.kid svg{display:block;width:1em;overflow:visible}
+.kid .wave{animation:wave 1.1s ease-in-out infinite}
+.kid .blink{animation:blink 4.2s infinite}
+.kid.jump{animation:hop2 .8s ease-in-out infinite}
+.kid.jump .wave{animation-duration:.45s}
+.kid.late{animation-delay:.7s}.kid.late .wave{animation-delay:.4s}
+.fkid{flex:none}
+.kidpair{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:end;justify-items:center;padding-top:6px}
+.kidpair .kc{display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0}
+.kidpair .kid{font-size:clamp(104px,30vw,150px)}
+.kidpair .bub{max-width:100%;text-align:center}
+.sidekid{display:none;align-items:flex-end;position:absolute;bottom:3vh}
+.sidekid .kid{font-size:min(84px,calc((50vw - 484px) / 1.85))}
+.sidekid .kid + .kid{margin-left:-.2em}
+.sidekid.l{right:calc(50% + 476px)}
+.sidekid.r{left:calc(50% + 476px)}
+@media (min-width:1160px){.sidekid{display:flex}}
+@keyframes wave{0%,100%{transform:rotate(0)}50%{transform:rotate(-24deg)}}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+@keyframes hop2{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+.kid .wave{animation-delay:var(--d,0s)}
+.kid.flip svg{transform:scaleX(-1)}
+.crowdtxt{font-family:var(--font-display);font-weight:800;font-size:clamp(18px,4.8vw,24px);color:var(--purple);text-align:center;text-wrap:balance}
+.crowd{container-type:inline-size;align-self:stretch;display:flex;flex-direction:column;align-items:center;padding-top:8px;margin-bottom:calc(14px - clamp(30px,6vw,46px));
+  background:
+    radial-gradient(circle at 8% 78%,var(--coral) 0 4px,transparent 5px),
+    radial-gradient(circle at 24% 90%,var(--sun) 0 4px,transparent 5px),
+    radial-gradient(circle at 76% 88%,var(--blue) 0 4px,transparent 5px),
+    radial-gradient(circle at 93% 76%,var(--purple) 0 4px,transparent 5px),
+    radial-gradient(ellipse 110% 42% at 50% 100%,var(--grass) 0 98%,transparent 100%)}
+.crow{display:flex;justify-content:center;align-items:flex-end;font-size:min(120px,calc(100cqw / 5.7))}
+.crow .kid{font-size:1em}
+.crow .kid + .kid{margin-left:-.22em}
+.crow.back .kid{font-size:.86em}
+.crow.front{margin-top:-.66em}
+.music{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px 0 12px;border-radius:99px;border:3px solid var(--card);background:var(--sun);color:var(--sun-ink);font-weight:700;font-size:15px;box-shadow:0 4px 0 rgba(0,0,0,.22);cursor:pointer;order:2;margin-left:auto}
+.music.off{background:var(--card);color:var(--muted);border-color:var(--line)}
+.music .mi{font-size:22px;line-height:1}
+.music.on .mi{animation:bob 1s ease-in-out infinite}
+.top .steps{order:3;flex:1 1 100%}
+@media (min-width:760px){.top .steps{order:2;flex:1 1 auto;justify-content:center}.music{order:3;margin-left:0}}
+.spark{position:fixed;z-index:50;pointer-events:none;font-size:26px;transform:translate(-50%,-50%);animation:fly .9s ease-out forwards}
+@keyframes pop{from{transform:scale(.2);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes hop{0%,100%{transform:translateY(0) rotate(var(--r))}50%{transform:translateY(-12px) rotate(calc(var(--r)*-1))}}
+@keyframes wig{0%,100%{transform:rotate(-1.5deg) scale(1)}50%{transform:rotate(1.5deg) scale(1.05)}}
+@keyframes twk{0%,100%{opacity:.45;transform:scale(.8)}50%{opacity:1;transform:scale(1.25)}}
+@keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.1)}}
+@keyframes fly{to{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) rotate(200deg);opacity:0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="room" aria-hidden="true">
+  <div class="floorfix"></div>
+  <div class="side l"><span>🪟</span><span>🚪</span><span>🎒</span></div>
+  <div class="side r"><span>🔔</span><span>🖼️</span><span>🪑</span></div>
+  <div class="sidekid l" id="kidL"></div>
+  <div class="sidekid r" id="kidR"></div>
+</div>
+<div class="wrap">
+  <section class="roomtop" aria-hidden="true">
+    <div class="wallrow">
+      <span class="wo">🕒</span>
+      <div class="chalk"><b>Matematika</b><span>Posisi Benda · Kelas 2</span></div>
+      <span class="wo">🗺️</span>
+      <span class="wo">🖼️</span>
+    </div>
+    <div class="shelf"><span>📚</span><span>🌍</span><span>🔬</span><span>🧮</span><span>📐</span><span>✏️</span><span>🎨</span></div>
+  </section>
+  <header class="top">
+    <div class="brand">Posisi Benda</div>
+    <button class="music on" id="music" type="button" aria-pressed="true"><span class="mi">🎵</span><span class="ml">Musik nyala</span></button>
+    <nav class="steps" id="steps" aria-label="Langkah belajar"></nav>
+  </header>
+  <main id="stage"></main>
+  <footer class="nav">
+    <button class="btn alt" id="prev" type="button">◀ Kembali</button>
+    <button class="btn" id="next" type="button">Lanjut ▶</button>
+  </footer>
+  <div class="roomfloor" aria-hidden="true"><div class="fkid" id="kidF1"></div><div class="fkid" id="kidF2"></div><span>🪴</span><span>🪑</span><div class="fkid" id="kidF3"></div><div class="fkid" id="kidF4"></div></div>
+</div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function(s){ return document.querySelector(s); };
+  /* ---------- backsound ceria + efek suara (dibuat dengan Web Audio, tanpa berkas audio) ---------- */
+  var Music = (function(){
+    var ctx = null, master = null, noiseBuf = null, timer = null, step = 0, nextTime = 0;
+    var playing = false, resumeOnShow = false, enabled = true, armed = true;
+    var BPM = 104, SPB = 60 / BPM / 2;
+    var CH = {C:[60,64,67], Am:[57,60,64], F:[57,60,65], G:[55,59,62]};
+    var BASS = {C:48, Am:45, F:41, G:43};
+    var PROG = ['C','Am','F','G','C','Am','F','G','C','Am','F','G','C','Am','F','G'];
+    var MEL = [
+      [76,0,79,76,72,0,74,76],[74,0,72,69,72,0,76,0],[72,0,69,72,77,0,76,74],[74,0,71,74,67,0,71,0],
+      [76,79,76,72,74,76,0,0],[69,72,76,72,69,0,0,0],[65,69,72,69,72,77,76,72],[74,71,67,71,74,0,79,0],
+      [79,0,76,0,79,76,72,0],[76,0,72,0,69,72,76,0],[77,0,76,77,81,0,77,0],[79,0,74,0,71,74,79,0],
+      [72,76,79,76,84,0,79,0],[81,0,76,0,72,76,81,0],[77,81,77,72,69,72,77,0],[79,77,76,74,72,0,0,0]
+    ];
+    function mf(m){ return 440 * Math.pow(2, (m - 69) / 12); }
+    function tone(f, t, d, type, vol){
+      var o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = type; o.frequency.setValueAtTime(f, t);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(vol, t + 0.012);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + d);
+      o.connect(g); g.connect(master);
+      o.start(t); o.stop(t + d + 0.05);
+    }
+    function kick(t){
+      var o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = 'sine';
+      o.frequency.setValueAtTime(140, t); o.frequency.exponentialRampToValueAtTime(45, t + 0.12);
+      g.gain.setValueAtTime(0.38, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.16);
+      o.connect(g); g.connect(master); o.start(t); o.stop(t + 0.2);
+    }
+    function hat(t){
+      var src = ctx.createBufferSource(), f = ctx.createBiquadFilter(), g = ctx.createGain();
+      src.buffer = noiseBuf; f.type = 'highpass'; f.frequency.value = 7000;
+      g.gain.setValueAtTime(0.07, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.05);
+      src.connect(f); f.connect(g); g.connect(master); src.start(t); src.stop(t + 0.06);
+    }
+    function playStep(s, t){
+      var bar = Math.floor(s / 8) % 16, i = s % 8, name = PROG[bar], m = MEL[bar][i];
+      if(m){ tone(mf(m), t, 0.42, 'triangle', 0.5); tone(mf(m) * 2, t, 0.16, 'sine', 0.08); }
+      if(i === 0 || i === 4){ tone(mf(BASS[name]), t, 0.38, 'triangle', 0.34); kick(t); }
+      if(i === 0 || i === 3 || i === 4 || i === 7){
+        var v = (i === 0 || i === 4) ? 0.11 : 0.065;
+        CH[name].forEach(function(n, k){ tone(mf(n), t + k * 0.012, 0.5, 'sine', v); });
+      }
+      if(i % 2 === 1) hat(t);
+    }
+    function sched(){
+      if(!ctx) return;
+      while(nextTime < ctx.currentTime + 0.2){ playStep(step % 128, nextTime); nextTime += SPB; step++; }
+    }
+    function setup(){
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if(!AC) return false;
+      ctx = new AC();
+      master = ctx.createGain(); master.gain.value = 0;
+      var comp = ctx.createDynamicsCompressor();
+      master.connect(comp); comp.connect(ctx.destination);
+      noiseBuf = ctx.createBuffer(1, Math.floor(ctx.sampleRate * 0.1), ctx.sampleRate);
+      var d = noiseBuf.getChannelData(0);
+      for(var k = 0; k < d.length; k++) d[k] = Math.random() * 2 - 1;
+      return true;
+    }
+    function start(){
+      try{
+        if(!ctx && !setup()) return;
+        if(ctx.state === 'suspended') ctx.resume();
+        playing = true; nextTime = ctx.currentTime + 0.1;
+        if(timer) clearInterval(timer);
+        timer = setInterval(sched, 30);
+        master.gain.cancelScheduledValues(ctx.currentTime);
+        master.gain.setTargetAtTime(0.3, ctx.currentTime, 0.15);
+      }catch(e){}
+    }
+    function stop(){
+      try{
+        playing = false;
+        if(timer){ clearInterval(timer); timer = null; }
+        if(!ctx) return;
+        master.gain.cancelScheduledValues(ctx.currentTime);
+        master.gain.setTargetAtTime(0, ctx.currentTime, 0.08);
+        setTimeout(function(){ if(!playing && ctx && ctx.state === 'running') ctx.suspend(); }, 500);
+      }catch(e){}
+    }
+    function sfx(ok){
+      try{
+        if(!enabled || !ctx || ctx.state !== 'running') return;
+        var t = ctx.currentTime + 0.02;
+        if(ok){ [76,79,84].forEach(function(n, k){ tone(mf(n), t + k * 0.08, 0.28, 'triangle', 0.7); }); }
+        else { tone(mf(60), t, 0.3, 'sine', 0.5); tone(mf(55), t + 0.12, 0.34, 'sine', 0.45); }
+      }catch(e){}
+    }
+    function paint(){
+      var b = document.getElementById('music'); if(!b) return;
+      var on = enabled;
+      b.classList.toggle('on', on); b.classList.toggle('off', !on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      b.querySelector('.mi').textContent = on ? '🎵' : '🔇';
+      b.querySelector('.ml').textContent = on ? 'Musik nyala' : 'Musik mati';
+    }
+    function toggle(){
+      enabled = !enabled; armed = false;
+      try{ localStorage.setItem('pb_music', enabled ? 'on' : 'off'); }catch(e){}
+      paint();
+      if(enabled) start(); else stop();
+    }
+    function first(e){
+      if(!armed) return;
+      if(e.target && e.target.closest && e.target.closest('#music')) return;
+      armed = false;
+      if(enabled) start();
+    }
+    function init(){
+      try{ if(localStorage.getItem('pb_music') === 'off') enabled = false; }catch(e){}
+      if(!(window.AudioContext || window.webkitAudioContext)){
+        var b = document.getElementById('music'); if(b) b.hidden = true; return;
+      }
+      paint();
+      document.addEventListener('pointerdown', first, true);
+      document.addEventListener('keydown', first, true);
+      var mb = document.getElementById('music'); if(mb) mb.addEventListener('click', toggle);
+      document.addEventListener('visibilitychange', function(){
+        if(document.hidden){ if(playing){ resumeOnShow = true; stop(); } }
+        else if(resumeOnShow && enabled){ resumeOnShow = false; start(); }
+      });
+    }
+    return {init:init, sfx:sfx};
+  })();
+
+  var esc = function(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); };
+  var S = function(e,x,y,s,l,z){ return {e:e,x:x,y:y,s:s,l:l,z:z}; };
+
+  function scene(items, bg, extra){
+    return '<div class="scene ' + (bg || 'garden') + '">' + items.map(function(i,n){
+      if(i.c){
+        return '<div class="box ' + i.c + '" style="left:' + i.x + '%;top:' + i.y + '%;--w:' + i.w + ';--h:' + i.h + ';z-index:' + (i.z||1) + '">' + (i.l ? '<span class="lb">' + i.l + '</span>' : '') + '</div>';
+      }
+      return '<div class="it" style="left:' + i.x + '%;top:' + i.y + '%;--s:' + (i.s||15) + ';--n:' + n + ';z-index:' + (i.z||1) + '"><span class="em">' + i.e + '</span>' + (i.l ? '<span class="lb">' + i.l + '</span>' : '') + '</div>';
+    }).join('') + (extra || '') + '</div>';
+  }
+  /* ---------- ilustrasi 3D bergaya mainan (gradasi, kilau, bayangan lantai) ---------- */
+  var DK = '#2B1B14';
+  var GR = {
+    orange:['#FFD9A0','#FF9A3C','#D9620C'], cream:['#FFFFFF','#FFF3DE','#E9CFA4'], creamD:['#F6E3B9','#E4C48A','#C79C58'],
+    pink:['#FFD0DC','#FF8FB0','#E0507F'], tan:['#F7D3A6','#DDA566','#B07838'], brown:['#C48E55','#8F5E2F','#5C3818'],
+    lilac:['#FFFFFF','#F1EBFB','#C6B9E4'], white:['#FFFFFF','#FFFFFF','#DDE4F0'], snow:['#FFFFFF','#F2F8FF','#C3D9F0'],
+    red:['#FFA8AE','#F2545B','#B92D3A'], redD:['#E8656B','#C03A44','#8E212C'], brick:['#E59A83','#C9715A','#9E4B38'], brickD:['#C9715A','#A8553F','#7C3A2A'],
+    blue:['#A9D0FF','#4C8BF5','#2A5CC0'], blueD:['#7DAEF0','#3B6FD0','#244A9A'], sky:['#EAF7FF','#BFE6FF','#8CC8F2'],
+    yellow:['#FFF4B0','#FFC83D','#E09A00'], green:['#BDF3CF','#4CC38A','#23885A'], purple:['#D6C8FF','#8A6BF0','#5A3FC0'],
+    purpleD:['#B8A3F5','#6E4FD6','#4A2FA8'], purpleL:['#EFE8FF','#C9B8FF','#9E86F2'],
+    wood:['#F6CC8C','#DB9744','#A9651D'], woodD:['#D9A360','#B87430','#855018'], woodL:['#FFE3B0','#F2BC6C','#CC8E3E'],
+    stone:['#EFE9DD','#CDC3B0','#A09580'], gray:['#D5DCEA','#9AA6C0','#66728F'], grayD:['#AEB9D1','#7B88A6','#4F5B78']
+  };
+  var BALL_COLS = ['#F2545B','#FFC83D','#4CC38A','#4C8BF5','#8A6BF0','#FF9A3C'];
+  function defsSvg(){
+    var d = Object.keys(GR).map(function(k){
+      var c = GR[k];
+      return '<radialGradient id="g_' + k + '" cx=".4" cy=".35" r=".78" fx=".32" fy=".24"><stop offset="0" stop-color="' + c[0] + '"/><stop offset=".55" stop-color="' + c[1] + '"/><stop offset="1" stop-color="' + c[2] + '"/></radialGradient>';
+    }).join('');
+    d += '<radialGradient id="g_shade" cx=".38" cy=".3" r=".8"><stop offset="0" stop-color="#fff" stop-opacity=".7"/><stop offset=".35" stop-color="#fff" stop-opacity="0"/><stop offset=".7" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".32"/></radialGradient>';
+    d += '<clipPath id="clip_ball"><circle cx="50" cy="54" r="36"/></clipPath>';
+    return '<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>' + d + '</defs></svg>';
+  }
+  function F(k){ return 'fill="url(#g_' + k + ')"'; }
+  function SH(cx,cy,rx,ry){ return '<ellipse cx="' + cx + '" cy="' + cy + '" rx="' + rx + '" ry="' + ry + '" fill="#2B1B14" opacity=".17"/>'; }
+  function GL(cx,cy,rx,ry,rot){ return '<ellipse cx="' + cx + '" cy="' + cy + '" rx="' + rx + '" ry="' + ry + '" transform="rotate(' + (rot||0) + ' ' + cx + ' ' + cy + ')" fill="#fff" opacity=".5"/>'; }
+  function EYE(x,y,r){
+    r = r || 1;
+    return '<ellipse cx="' + x + '" cy="' + y + '" rx="' + (4.6*r) + '" ry="' + (5.6*r) + '" fill="' + DK + '"/>' +
+      '<circle cx="' + (x+1.7*r) + '" cy="' + (y-2.2*r) + '" r="' + (1.9*r) + '" fill="#fff"/>' +
+      '<circle cx="' + (x-1.5*r) + '" cy="' + (y+2.2*r) + '" r="' + (0.9*r) + '" fill="#fff" opacity=".8"/>';
+  }
+  function BLUSH(x,y,r){ return '<circle cx="' + x + '" cy="' + y + '" r="' + (r||5.5) + '" fill="#FF8FB0" opacity=".5"/>'; }
+  function STAR(cx,cy,R,r){
+    var p = [];
+    for(var i = 0; i < 10; i++){ var a = -Math.PI/2 + i*Math.PI/5, rad = i % 2 ? r : R; p.push((cx + rad*Math.cos(a)).toFixed(1) + ',' + (cy + rad*Math.sin(a)).toFixed(1)); }
+    return p.join(' ');
+  }
+  function S3(inner,h){
+    h = h || 100;
+    return '<svg viewBox="0 0 100 ' + h + '" aria-hidden="true" focusable="false"' + (h !== 100 ? ' style="height:' + (h/100) + 'em"' : '') + '>' + inner + '</svg>';
+  }
+  function ballWedges(){
+    var s = '', cx = 50, cy = 54;
+    for(var i = 0; i < 6; i++){
+      var a1 = (-90 + 60*i) * Math.PI/180, a2 = (-90 + 60*(i+1)) * Math.PI/180;
+      s += '<polygon points="' + cx + ',' + cy + ' ' + (cx + 60*Math.cos(a1)).toFixed(1) + ',' + (cy + 60*Math.sin(a1)).toFixed(1) + ' ' + (cx + 60*Math.cos(a2)).toFixed(1) + ',' + (cy + 60*Math.sin(a2)).toFixed(1) + '" fill="' + BALL_COLS[i] + '"/>';
+    }
+    return s;
+  }
+  function balloon(k){
+    return S3(
+      '<path d="M50 68 Q43 78 50 88 Q56 94 50 100" fill="none" stroke="#8A8FA8" stroke-width="1.6" stroke-linecap="round"/>' +
+      '<polygon points="46,66 54,66 50,72" ' + F(k) + '/>' +
+      '<ellipse cx="50" cy="36" rx="25" ry="31" ' + F(k) + '/>' +
+      '<ellipse cx="50" cy="36" rx="25" ry="31" fill="url(#g_shade)"/>' +
+      GL(40,22,6,10,25)
+    );
+  }
+  function bunting(){
+    var cols = ['#F2545B','#FFC83D','#4CC38A','#4C8BF5','#8A6BF0','#FF9A3C'];
+    var s = '<path d="M0 3 Q50 7 100 3" fill="none" stroke="#7A5A3A" stroke-width="1"/>';
+    for(var i = 0; i < 12; i++){
+      var x = 4 + i*8.4, t = x/100, y = 3 + 8*t*(1-t);
+      s += '<polygon points="' + (x-3.4).toFixed(1) + ',' + y.toFixed(1) + ' ' + (x+3.4).toFixed(1) + ',' + y.toFixed(1) + ' ' + x.toFixed(1) + ',' + (y+7.5).toFixed(1) + '" fill="' + cols[i % 6] + '"/>';
+    }
+    return S3(s, 16);
+  }
+
+  var ART = {
+    cat: S3(
+      SH(50,95,30,4.5) +
+      '<path d="M70 84 C93 86 99 60 84 52" fill="none" stroke="url(#g_orange)" stroke-width="10" stroke-linecap="round"/>' +
+      '<path d="M24 36 L22 9 L47 23 Z" ' + F('orange') + ' stroke="#FF9A3C" stroke-width="5" stroke-linejoin="round"/>' +
+      '<path d="M76 36 L78 9 L53 23 Z" ' + F('orange') + ' stroke="#FF9A3C" stroke-width="5" stroke-linejoin="round"/>' +
+      '<path d="M28 29 L27 17 L38 24 Z" ' + F('pink') + ' stroke="#FF8FB0" stroke-width="2.5" stroke-linejoin="round"/>' +
+      '<path d="M72 29 L73 17 L62 24 Z" ' + F('pink') + ' stroke="#FF8FB0" stroke-width="2.5" stroke-linejoin="round"/>' +
+      '<ellipse cx="50" cy="77" rx="23" ry="19" ' + F('orange') + '/>' +
+      '<ellipse cx="50" cy="82" rx="12" ry="12" ' + F('cream') + '/>' +
+      '<ellipse cx="39.5" cy="92" rx="8" ry="5.5" ' + F('cream') + '/><ellipse cx="60.5" cy="92" rx="8" ry="5.5" ' + F('cream') + '/>' +
+      '<ellipse cx="50" cy="45" rx="31" ry="27" ' + F('orange') + '/>' +
+      GL(37,27,11,5,-28) +
+      '<path d="M50 20 L50 28 M41.5 21.5 L43 28 M58.5 21.5 L57 28" stroke="#C85A0E" stroke-width="3" stroke-linecap="round" fill="none"/>' +
+      EYE(38,46) + EYE(62,46) + BLUSH(27.5,57) + BLUSH(72.5,57) +
+      '<ellipse cx="50" cy="57" rx="10" ry="7" ' + F('cream') + '/>' +
+      '<path d="M45.5 52.5 Q50 50 54.5 52.5 Q53.5 57 50 58 Q46.5 57 45.5 52.5 Z" ' + F('pink') + '/>' +
+      '<path d="M50 58 L50 61 M50 61 Q46 65 43 62 M50 61 Q54 65 57 62" fill="none" stroke="' + DK + '" stroke-width="1.8" stroke-linecap="round"/>' +
+      '<path d="M20 50 L8 47 M20 56 L8 57 M80 50 L92 47 M80 56 L92 57" stroke="' + DK + '" stroke-width="1.5" stroke-linecap="round" opacity=".55"/>'
+    ),
+    dog: S3(
+      SH(50,95,30,4.5) +
+      '<path d="M30 84 C8 86 3 62 17 54" fill="none" stroke="url(#g_tan)" stroke-width="10" stroke-linecap="round"/>' +
+      '<ellipse cx="21" cy="44" rx="10.5" ry="20" transform="rotate(14 21 44)" ' + F('brown') + '/>' +
+      '<ellipse cx="79" cy="44" rx="10.5" ry="20" transform="rotate(-14 79 44)" ' + F('brown') + '/>' +
+      '<ellipse cx="50" cy="77" rx="22" ry="19" ' + F('tan') + '/>' +
+      '<ellipse cx="50" cy="82" rx="11" ry="12" ' + F('cream') + '/>' +
+      '<ellipse cx="40" cy="92" rx="8" ry="5.5" ' + F('cream') + '/><ellipse cx="60" cy="92" rx="8" ry="5.5" ' + F('cream') + '/>' +
+      '<ellipse cx="50" cy="45" rx="28" ry="26" ' + F('tan') + '/>' +
+      GL(38,28,10,4.5,-28) +
+      '<ellipse cx="64" cy="42" rx="9" ry="10" ' + F('brown') + ' opacity=".9"/>' +
+      EYE(38,44,.95) + EYE(62,44,.95) + BLUSH(29,55,4.8) + BLUSH(71,55,4.8) +
+      '<ellipse cx="50" cy="57" rx="14" ry="10" ' + F('cream') + '/>' +
+      '<ellipse cx="50" cy="67" rx="3.8" ry="4.8" ' + F('pink') + '/>' +
+      '<path d="M50 56 L50 60 M50 60 Q45 65 41 61 M50 60 Q55 65 59 61" fill="none" stroke="' + DK + '" stroke-width="2" stroke-linecap="round"/>' +
+      '<ellipse cx="50" cy="52" rx="5.8" ry="4.2" fill="' + DK + '"/><ellipse cx="48.4" cy="50.8" rx="1.7" ry="1.1" fill="#fff"/>' +
+      '<path d="M36 70 Q50 79 64 70" fill="none" stroke="url(#g_blue)" stroke-width="6" stroke-linecap="round"/>' +
+      '<circle cx="50" cy="77" r="3.8" ' + F('yellow') + '/>'
+    ),
+    rabbit: S3(
+      SH(50,95,28,4.5) +
+      '<ellipse cx="37" cy="22" rx="8" ry="19" transform="rotate(-8 37 22)" ' + F('lilac') + ' stroke="#CBBFE3" stroke-width="1.2"/>' +
+      '<ellipse cx="63" cy="22" rx="8" ry="19" transform="rotate(8 63 22)" ' + F('lilac') + ' stroke="#CBBFE3" stroke-width="1.2"/>' +
+      '<ellipse cx="37" cy="24" rx="4" ry="12" transform="rotate(-8 37 24)" ' + F('pink') + '/>' +
+      '<ellipse cx="63" cy="24" rx="4" ry="12" transform="rotate(8 63 24)" ' + F('pink') + '/>' +
+      '<ellipse cx="50" cy="78" rx="21" ry="18" ' + F('lilac') + ' stroke="#CBBFE3" stroke-width="1.2"/>' +
+      '<ellipse cx="50" cy="82" rx="11.5" ry="11" ' + F('white') + '/>' +
+      '<ellipse cx="41" cy="92" rx="7.2" ry="5" ' + F('white') + ' stroke="#CBBFE3" stroke-width="1"/><ellipse cx="59" cy="92" rx="7.2" ry="5" ' + F('white') + ' stroke="#CBBFE3" stroke-width="1"/>' +
+      '<ellipse cx="50" cy="52" rx="25" ry="22" ' + F('lilac') + ' stroke="#CBBFE3" stroke-width="1.2"/>' +
+      GL(39,38,9,4,-28) +
+      EYE(41,50,.9) + EYE(59,50,.9) + BLUSH(32,59,4.8) + BLUSH(68,59,4.8) +
+      '<rect x="46.5" y="61" width="7" height="6.5" rx="1.6" ' + F('white') + ' stroke="#CBBFE3" stroke-width="1"/>' +
+      '<ellipse cx="50" cy="56" rx="3.4" ry="2.5" ' + F('pink') + '/>' +
+      '<path d="M50 58 L50 61 M50 60.5 Q46 64 43 61 M50 60.5 Q54 64 57 61" fill="none" stroke="' + DK + '" stroke-width="1.6" stroke-linecap="round"/>'
+    ),
+    house: S3(
+      SH(50,96,44,4.5) +
+      '<polygon points="66,50 90,40 90,86 66,94" ' + F('creamD') + '/>' +
+      '<rect x="12" y="48" width="54" height="46" rx="2" ' + F('cream') + '/>' +
+      '<polygon points="40,16 66,8 94,40 68,50" ' + F('redD') + '/>' +
+      '<rect x="72" y="13" width="9" height="21" rx="1" ' + F('brick') + '/><rect x="70" y="10" width="13" height="5" rx="2" ' + F('brickD') + '/>' +
+      '<polygon points="8,50 40,16 72,50" ' + F('red') + '/>' +
+      '<path d="M15 47 L38 23" stroke="#fff" stroke-opacity=".38" stroke-width="3" stroke-linecap="round"/>' +
+      '<circle cx="40" cy="37" r="5.5" ' + F('sky') + ' stroke="#fff" stroke-width="2.2"/><path d="M40 32 L40 42 M35 37 L45 37" stroke="#fff" stroke-width="1.3"/>' +
+      '<rect x="16" y="58" width="12" height="12" rx="2" ' + F('sky') + ' stroke="#fff" stroke-width="2"/><path d="M22 58 L22 70 M16 64 L28 64" stroke="#fff" stroke-width="1.4"/>' +
+      '<rect x="50" y="58" width="12" height="12" rx="2" ' + F('sky') + ' stroke="#fff" stroke-width="2"/><path d="M56 58 L56 70 M50 64 L62 64" stroke="#fff" stroke-width="1.4"/>' +
+      '<polygon points="72,58 84,54 84,68 72,72" ' + F('sky') + ' stroke="#fff" stroke-width="1.6"/>' +
+      '<path d="M30 94 L30 76 Q30 66 39 66 Q48 66 48 76 L48 94 Z" ' + F('blue') + '/>' +
+      '<circle cx="44" cy="82" r="1.9" ' + F('yellow') + '/>' +
+      '<rect x="33" y="93" width="18" height="4" rx="1.5" ' + F('stone') + '/>' +
+      '<ellipse cx="12" cy="90" rx="11" ry="8" ' + F('green') + '/><ellipse cx="88" cy="90" rx="10" ry="7.5" ' + F('green') + '/>' +
+      '<circle cx="8" cy="87" r="2.3" ' + F('yellow') + '/><circle cx="16" cy="92" r="2.3" ' + F('pink') + '/><circle cx="85" cy="88" r="2.3" ' + F('pink') + '/><circle cx="92" cy="92" r="2.3" ' + F('yellow') + '/>'
+    ),
+    tree: S3(
+      SH(50,96,26,4) +
+      '<path d="M42 96 Q45 80 45 62 L55 62 Q55 80 58 96 Z" ' + F('wood') + '/>' +
+      '<circle cx="30" cy="52" r="17" ' + F('green') + '/><circle cx="70" cy="52" r="17" ' + F('green') + '/>' +
+      '<circle cx="50" cy="62" r="17" ' + F('green') + '/><circle cx="50" cy="35" r="23" ' + F('green') + '/>' +
+      GL(40,24,9,5,-30) +
+      '<circle cx="41" cy="40" r="3.4" ' + F('red') + '/><circle cx="62" cy="31" r="3.4" ' + F('red') + '/><circle cx="33" cy="56" r="3.4" ' + F('red') + '/><circle cx="68" cy="58" r="3.4" ' + F('red') + '/><circle cx="52" cy="64" r="3.4" ' + F('red') + '/>'
+    ),
+    bird: S3(
+      SH(50,95,22,4) +
+      '<path d="M42 87 L42 94 M58 87 L58 94" stroke="#FF9A3C" stroke-width="3" stroke-linecap="round"/>' +
+      '<ellipse cx="23" cy="60" rx="8" ry="14" transform="rotate(18 23 60)" ' + F('blueD') + '/>' +
+      '<ellipse cx="77" cy="60" rx="8" ry="14" transform="rotate(-18 77 60)" ' + F('blueD') + '/>' +
+      '<circle cx="44" cy="27" r="4.5" ' + F('blue') + '/><circle cx="50" cy="24" r="4.8" ' + F('blue') + '/><circle cx="56" cy="27" r="4.5" ' + F('blue') + '/>' +
+      '<circle cx="50" cy="58" r="27" ' + F('blue') + '/>' +
+      '<ellipse cx="50" cy="69" rx="16" ry="14" ' + F('cream') + '/>' +
+      GL(38,42,10,5,-30) +
+      EYE(40,52,.85) + EYE(60,52,.85) + BLUSH(31,62,4.4) + BLUSH(69,62,4.4) +
+      '<path d="M44 59 L56 59 L50 69 Z" ' + F('yellow') + ' stroke="#E09A00" stroke-width="1.6" stroke-linejoin="round"/>'
+    ),
+    chair: S3(
+      SH(50,96,31,4) +
+      '<rect x="30" y="58" width="6" height="32" rx="2" ' + F('woodD') + '/><rect x="64" y="58" width="6" height="32" rx="2" ' + F('woodD') + '/>' +
+      '<rect x="28" y="6" width="44" height="44" rx="9" ' + F('wood') + '/>' +
+      '<rect x="35" y="13" width="30" height="7" rx="3" ' + F('woodD') + '/><rect x="35" y="24" width="30" height="7" rx="3" ' + F('woodD') + '/><rect x="35" y="35" width="30" height="7" rx="3" ' + F('woodD') + '/>' +
+      '<polygon points="22,50 78,50 86,58 14,58" ' + F('woodL') + '/>' +
+      '<rect x="14" y="58" width="72" height="9" rx="3" ' + F('wood') + '/>' +
+      '<rect x="16" y="66" width="8" height="30" rx="3" ' + F('wood') + '/><rect x="76" y="66" width="8" height="30" rx="3" ' + F('wood') + '/>'
+    ),
+    ball: S3(
+      SH(50,95,28,4.5) +
+      '<g clip-path="url(#clip_ball)">' + ballWedges() + '</g>' +
+      '<circle cx="50" cy="54" r="36" fill="url(#g_shade)"/>' +
+      '<circle cx="50" cy="54" r="5" fill="#fff"/><circle cx="50" cy="54" r="5" fill="url(#g_shade)"/>' +
+      GL(37,35,10,5,-35)
+    ),
+    apple: S3(
+      SH(50,95,26,4.5) +
+      '<path d="M50 30 C62 22 84 30 80 54 C78 74 64 90 50 86 C36 90 22 74 20 54 C16 30 38 22 50 30 Z" ' + F('red') + '/>' +
+      '<path d="M50 30 C62 22 84 30 80 54 C78 74 64 90 50 86 C36 90 22 74 20 54 C16 30 38 22 50 30 Z" fill="url(#g_shade)"/>' +
+      '<path d="M50 30 Q50 20 55 12" fill="none" stroke="#7C4A22" stroke-width="4" stroke-linecap="round"/>' +
+      '<ellipse cx="64" cy="19" rx="11" ry="5.5" transform="rotate(-25 64 19)" ' + F('green') + '/>' +
+      GL(35,44,6,10,25)
+    ),
+    book: S3(
+      SH(50,95,32,4.5) +
+      '<rect x="27" y="20" width="52" height="68" rx="3" fill="#fff" stroke="#CFD8E8" stroke-width="1.6"/>' +
+      '<path d="M32 90 L76 90 M30 86 L78 86" stroke="#DCE3F0" stroke-width="1.4"/>' +
+      '<rect x="20" y="12" width="52" height="70" rx="4" ' + F('blue') + '/>' +
+      '<rect x="20" y="12" width="9" height="70" rx="4" ' + F('blueD') + '/>' +
+      '<rect x="35" y="24" width="30" height="14" rx="3" ' + F('yellow') + '/>' +
+      '<polygon points="' + STAR(50,60,10,4.4) + '" ' + F('yellow') + '/>' +
+      '<path d="M26 18 L26 76" stroke="#fff" stroke-opacity=".3" stroke-width="2"/>'
+    ),
+    teddy: S3(
+      SH(50,95,28,4.5) +
+      '<circle cx="27" cy="22" r="10" ' + F('brown') + '/><circle cx="27" cy="22" r="5" ' + F('tan') + '/>' +
+      '<circle cx="73" cy="22" r="10" ' + F('brown') + '/><circle cx="73" cy="22" r="5" ' + F('tan') + '/>' +
+      '<ellipse cx="50" cy="77" rx="21" ry="19" ' + F('brown') + '/><ellipse cx="50" cy="80" rx="12" ry="12" ' + F('tan') + '/>' +
+      '<ellipse cx="24" cy="72" rx="7" ry="11" transform="rotate(22 24 72)" ' + F('brown') + '/><ellipse cx="76" cy="72" rx="7" ry="11" transform="rotate(-22 76 72)" ' + F('brown') + '/>' +
+      '<ellipse cx="38" cy="92" rx="9" ry="6" ' + F('brown') + '/><ellipse cx="62" cy="92" rx="9" ry="6" ' + F('brown') + '/>' +
+      '<circle cx="38" cy="92" r="3.2" ' + F('tan') + '/><circle cx="62" cy="92" r="3.2" ' + F('tan') + '/>' +
+      '<circle cx="50" cy="43" r="26" ' + F('brown') + '/>' +
+      GL(38,26,10,4.5,-28) +
+      EYE(40,38,.8) + EYE(60,38,.8) +
+      '<ellipse cx="50" cy="52" rx="11.5" ry="9" ' + F('tan') + '/>' +
+      '<ellipse cx="50" cy="48.5" rx="4.2" ry="3" fill="' + DK + '"/>' +
+      '<path d="M50 51 L50 54 M50 54 Q46 58 43 55 M50 54 Q54 58 57 55" fill="none" stroke="' + DK + '" stroke-width="1.6" stroke-linecap="round"/>' +
+      '<polygon points="50,68 40,63 40,73" ' + F('red') + '/><polygon points="50,68 60,63 60,73" ' + F('red') + '/><circle cx="50" cy="68" r="3.4" ' + F('redD') + '/>'
+    ),
+    chick: S3(
+      SH(50,95,26,4.5) +
+      '<path d="M40 88 L40 95 M60 88 L60 95" stroke="#FF9A3C" stroke-width="3.2" stroke-linecap="round"/>' +
+      '<ellipse cx="22" cy="62" rx="7.5" ry="12" transform="rotate(16 22 62)" ' + F('yellow') + '/><ellipse cx="78" cy="62" rx="7.5" ry="12" transform="rotate(-16 78 62)" ' + F('yellow') + '/>' +
+      '<ellipse cx="46" cy="24" rx="3" ry="6" transform="rotate(-20 46 24)" ' + F('yellow') + '/><ellipse cx="54" cy="23" rx="3" ry="7" transform="rotate(10 54 23)" ' + F('yellow') + '/>' +
+      '<circle cx="50" cy="58" r="30" ' + F('yellow') + '/>' +
+      GL(37,40,10,5,-30) +
+      EYE(39,52,.85) + EYE(61,52,.85) + BLUSH(29,63,4.6) + BLUSH(71,63,4.6) +
+      '<path d="M43 60 L57 60 L50 71 Z" ' + F('orange') + ' stroke="#E06A12" stroke-width="1.6" stroke-linejoin="round"/>'
+    ),
+    cloud: S3(
+      '<ellipse cx="50" cy="70" rx="40" ry="16" ' + F('snow') + '/>' +
+      '<circle cx="28" cy="60" r="19" ' + F('snow') + '/><circle cx="72" cy="60" r="20" ' + F('snow') + '/><circle cx="50" cy="46" r="26" ' + F('snow') + '/>' +
+      GL(40,34,9,4.5,-30) +
+      EYE(41,60,.62) + EYE(59,60,.62) + BLUSH(34,68,3.6) + BLUSH(66,68,3.6) +
+      '<path d="M46 68 Q50 73 54 68" fill="none" stroke="' + DK + '" stroke-width="1.6" stroke-linecap="round"/>'
+    ),
+    mountain: S3(
+      SH(50,96,46,4) +
+      '<polygon points="62,34 98,92 38,92" ' + F('gray') + '/>' +
+      '<polygon points="4,92 38,20 52,92" ' + F('gray') + '/><polygon points="38,20 80,92 52,92" ' + F('grayD') + '/>' +
+      '<polygon points="38,20 30.4,36 35,33 39,39 43.5,33 46.9,36" ' + F('snow') + '/>' +
+      '<polygon points="62,34 56,45 60,43 63,48 66,43 69,45" ' + F('snow') + '/>' +
+      '<ellipse cx="18" cy="92" rx="22" ry="8" ' + F('green') + '/><ellipse cx="84" cy="92" rx="20" ry="7" ' + F('green') + '/>'
+    ),
+    boat: S3(
+      SH(50,96,40,4) +
+      '<rect x="48" y="14" width="3.6" height="54" rx="1.5" ' + F('wood') + '/>' +
+      '<polygon points="53,18 53,62 84,62" ' + F('yellow') + '/>' +
+      '<polygon points="47,24 47,62 20,62" ' + F('blue') + '/>' +
+      '<polygon points="50,7 62,11 50,15" ' + F('red') + '/>' +
+      '<path d="M10 66 L90 66 Q82 90 64 90 L36 90 Q18 90 10 66 Z" ' + F('red') + '/>' +
+      '<path d="M15 73 L85 73 Q82 79 78 80 L22 80 Q18 79 15 73 Z" fill="#fff" opacity=".9"/>' +
+      '<circle cx="35" cy="76.5" r="2.2" ' + F('blue') + '/><circle cx="50" cy="76.5" r="2.2" ' + F('blue') + '/><circle cx="65" cy="76.5" r="2.2" ' + F('blue') + '/>'
+    ),
+    fish: S3(
+      '<polygon points="70,52 94,32 94,72" ' + F('orange') + ' stroke="#FF9A3C" stroke-width="3" stroke-linejoin="round"/>' +
+      '<polygon points="34,32 50,16 60,34" ' + F('yellow') + ' stroke="#FFC83D" stroke-width="3" stroke-linejoin="round"/>' +
+      '<ellipse cx="46" cy="52" rx="30" ry="23" ' + F('orange') + '/>' +
+      '<path d="M44 32 Q51 52 44 72" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="5" stroke-linecap="round"/>' +
+      '<path d="M56 36 Q62 52 56 68" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="3.5" stroke-linecap="round"/>' +
+      GL(34,38,9,4,-30) + EYE(30,48,.75) + BLUSH(28,60,3.8) +
+      '<path d="M18 58 Q22 63 27 61" fill="none" stroke="' + DK + '" stroke-width="1.6" stroke-linecap="round"/>' +
+      '<circle cx="10" cy="30" r="4" fill="#fff" fill-opacity=".5" stroke="#fff" stroke-width="1.2"/><circle cx="18" cy="18" r="2.6" fill="#fff" fill-opacity=".5" stroke="#fff" stroke-width="1.1"/>'
+    ),
+    car: S3(
+      SH(50,95,38,4.5) +
+      '<path d="M26 48 Q30 22 46 22 L62 22 Q74 24 79 48 Z" ' + F('red') + '/>' +
+      '<path d="M32 46 Q35 28 46 28 L50 28 L50 46 Z" ' + F('sky') + '/><path d="M55 28 L62 28 Q70 30 73 46 L55 46 Z" ' + F('sky') + '/>' +
+      '<rect x="6" y="46" width="88" height="32" rx="11" ' + F('red') + '/>' +
+      GL(30,52,13,3.6,-6) +
+      '<path d="M8 66 L92 66" stroke="#fff" stroke-opacity=".5" stroke-width="3"/>' +
+      '<circle cx="90" cy="58" r="4.2" ' + F('yellow') + '/><rect x="5" y="56" width="4.5" height="6" rx="2" ' + F('redD') + '/>' +
+      '<circle cx="28" cy="78" r="12" fill="#2B2F3F"/><circle cx="28" cy="78" r="5.5" ' + F('stone') + '/>' +
+      '<circle cx="72" cy="78" r="12" fill="#2B2F3F"/><circle cx="72" cy="78" r="5.5" ' + F('stone') + '/>'
+    ),
+    gift: S3(
+      SH(50,96,38,4.5) +
+      '<polygon points="62,46 88,36 88,84 62,94" ' + F('purpleD') + '/>' +
+      '<polygon points="12,46 38,36 88,36 62,46" ' + F('purpleL') + '/>' +
+      '<rect x="12" y="46" width="50" height="48" ' + F('purple') + '/>' +
+      '<rect x="31" y="46" width="12" height="48" ' + F('yellow') + '/>' +
+      '<polygon points="31,46 43,46 69,36 57,36" ' + F('yellow') + '/>' +
+      '<polygon points="62,60 62,70 88,60 88,50" fill="#FFC83D" opacity=".0"/>' +
+      '<ellipse cx="40" cy="31" rx="9" ry="5.5" transform="rotate(-28 40 31)" ' + F('red') + '/>' +
+      '<ellipse cx="58" cy="31" rx="9" ry="5.5" transform="rotate(28 58 31)" ' + F('red') + '/>' +
+      '<circle cx="49" cy="35" r="4.2" ' + F('redD') + '/>'
+    ),
+    table: S3(
+      '<ellipse cx="50" cy="59" rx="47" ry="3.2" fill="#2B1B14" opacity=".15"/>' +
+      '<rect x="18" y="26" width="6" height="22" rx="2" ' + F('woodD') + '/><rect x="76" y="26" width="6" height="22" rx="2" ' + F('woodD') + '/>' +
+      '<polygon points="14,10 86,10 98,26 2,26" ' + F('woodL') + '/>' +
+      '<polygon points="14,10 86,10 90,14 10,14" fill="#fff" opacity=".28"/>' +
+      '<rect x="2" y="26" width="96" height="7" rx="2.5" ' + F('wood') + '/>' +
+      '<rect x="6" y="33" width="9" height="26" rx="3" ' + F('wood') + '/><rect x="85" y="33" width="9" height="26" rx="3" ' + F('wood') + '/>', 62
+    ),
+    crateBack: S3(
+      '<rect x="2" y="4" width="96" height="56" rx="8" ' + F('woodD') + '/>' +
+      '<rect x="2" y="4" width="96" height="10" rx="5" ' + F('wood') + '/>' +
+      '<rect x="8" y="16" width="84" height="40" rx="5" fill="#000" opacity=".16"/>', 60
+    ),
+    crateFront: S3(
+      '<rect x="0" y="0" width="100" height="34" rx="7" ' + F('wood') + '/>' +
+      '<path d="M3 11 L97 11 M3 22 L97 22" stroke="#A9651D" stroke-opacity=".55" stroke-width="1.6"/>' +
+      '<rect x="6" y="0" width="9" height="34" rx="3" ' + F('woodL') + '/><rect x="85" y="0" width="9" height="34" rx="3" ' + F('woodL') + '/>' +
+      '<rect x="0" y="0" width="100" height="5" rx="2.5" fill="#fff" opacity=".35"/>', 34
+    ),
+    balloonR: balloon('red'), balloonB: balloon('blue'), balloonY: balloon('yellow'), balloonP: balloon('purple'),
+    bunting: bunting()
+  };
+
+  /* ---------- anak SD berseragam merah putih (beranimasi lewat CSS: lambaian tangan, kedip, naik-turun) ---------- */
+  GR.skin = ['#FFE3C8','#F6C092','#D99A68'];
+  GR.hair = ['#6B5442','#33241A','#1A110B'];
+  GR.shoe = ['#6B7490','#2E3348','#171A28'];
+  function arm(side, wave){
+    /* side: -1 = lengan kiri (di sisi kiri gambar), 1 = lengan kanan */
+    if(wave){
+      return '<g class="wave" style="transform-origin:70px 64px">' +
+        '<path d="M70 65 L79 57" stroke="#DDE4F0" stroke-width="11" stroke-linecap="round" fill="none"/><path d="M70 65 L79 57" stroke="#fff" stroke-width="8.4" stroke-linecap="round" fill="none"/>' +
+        '<path d="M79 57 L86 44" stroke="#F4BC8C" stroke-width="6" stroke-linecap="round" fill="none"/>' +
+        '<circle cx="87" cy="40" r="5.6" ' + F('skin') + '/></g>';
+    }
+    return '<path d="M30 65 L27 78" stroke="#DDE4F0" stroke-width="11" stroke-linecap="round" fill="none"/><path d="M30 65 L27 78" stroke="#fff" stroke-width="8.4" stroke-linecap="round" fill="none"/>' +
+      '<path d="M27 78 L25 90" stroke="#F4BC8C" stroke-width="6" stroke-linecap="round" fill="none"/>' +
+      '<circle cx="25" cy="93" r="5.4" ' + F('skin') + '/>';
+  }
+  function kidLegs(){
+    return '<rect x="38" y="98" width="9" height="18" rx="3.5" ' + F('skin') + '/><rect x="53" y="98" width="9" height="18" rx="3.5" ' + F('skin') + '/>' +
+      '<rect x="37.5" y="108" width="10" height="10" rx="3" fill="#fff" stroke="#DDE4F0" stroke-width="1"/><rect x="52.5" y="108" width="10" height="10" rx="3" fill="#fff" stroke="#DDE4F0" stroke-width="1"/>' +
+      '<ellipse cx="41.5" cy="121.5" rx="8.4" ry="4.6" ' + F('shoe') + '/><ellipse cx="58.5" cy="121.5" rx="8.4" ry="4.6" ' + F('shoe') + '/>';
+  }
+  function kidFace(cx, cy, eyeDx){
+    return '<g class="blink" style="transform-origin:' + cx + 'px ' + cy + 'px">' + EYE(cx-eyeDx, cy, .72) + EYE(cx+eyeDx, cy, .72) + '</g>' +
+      '<path d="M' + (cx-eyeDx-4) + ' ' + (cy-8) + ' Q' + (cx-eyeDx) + ' ' + (cy-10.5) + ' ' + (cx-eyeDx+4) + ' ' + (cy-8) + ' M' + (cx+eyeDx-4) + ' ' + (cy-8) + ' Q' + (cx+eyeDx) + ' ' + (cy-10.5) + ' ' + (cx+eyeDx+4) + ' ' + (cy-8) + '" fill="none" stroke="' + DK + '" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>' +
+      BLUSH(cx-eyeDx-5, cy+8, 4.2) + BLUSH(cx+eyeDx+5, cy+8, 4.2) +
+      '<path d="M' + (cx-5) + ' ' + (cy+8) + ' Q' + cx + ' ' + (cy+14) + ' ' + (cx+5) + ' ' + (cy+8) + ' Z" fill="#B8434B" stroke="' + DK + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M' + (cx-3) + ' ' + (cy+9) + ' L' + (cx+3) + ' ' + (cy+9) + '" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>';
+  }
+  ART.girl = S3(
+    SH(50,124,27,4.2) + kidLegs() +
+    '<path d="M31 80 L69 80 L77 108 L23 108 Z" ' + F('red') + '/>' +
+    '<path d="M38 82 L35 107 M46 82 L45 107 M54 82 L55 107 M62 82 L65 107" stroke="#B92D3A" stroke-width="1.3" opacity=".7"/>' +
+    '<rect x="30" y="58" width="40" height="26" rx="9" ' + F('white') + ' stroke="#DDE4F0" stroke-width="1.2"/>' +
+    '<path d="M39 62 L37 84 M61 62 L63 84" stroke="#C93A46" stroke-width="3.2" stroke-linecap="round"/>' +
+    arm(-1,false) + arm(1,true) +
+    '<path d="M50 7 C28 7 19 25 20 42 C20 57 27 68 35 74 L65 74 C73 68 80 57 80 42 C81 25 72 7 50 7 Z" ' + F('white') + ' stroke="#D3DCEC" stroke-width="1.6"/>' +
+    '<path d="M35 74 Q50 80 65 74" fill="none" stroke="#D3DCEC" stroke-width="1.4"/>' +
+    '<ellipse cx="50" cy="41" rx="19" ry="21" fill="#E4EAF6"/>' +
+    '<ellipse cx="50" cy="41" rx="17" ry="19" ' + F('skin') + '/>' +
+    GL(38,13,10,4,-22) +
+    kidFace(50, 41, 7.4) +
+    '<polygon points="43,75 50,78 57,75 57,83 50,80 43,83" ' + F('red') + '/><circle cx="50" cy="77.5" r="2.6" ' + F('redD') + '/>' +
+    '<circle cx="66" cy="68" r="2.6" ' + F('red') + ' stroke="#fff" stroke-width="1"/>',
+    130);
+  ART.boy = S3(
+    SH(50,124,27,4.2) + kidLegs() +
+    '<path d="M31 82 L69 82 L71 104 L53 104 L50 97 L47 104 L29 104 Z" ' + F('red') + '/>' +
+    '<path d="M50 84 L50 97" stroke="#B92D3A" stroke-width="1.2" opacity=".6"/>' +
+    '<rect x="30" y="56" width="40" height="32" rx="9" ' + F('white') + ' stroke="#DDE4F0" stroke-width="1.2"/>' +
+    '<path d="M38 60 L36 84 M62 60 L64 84" stroke="#C93A46" stroke-width="3.2" stroke-linecap="round"/>' +
+    '<rect x="55" y="72" width="9" height="8" rx="2" fill="none" stroke="#C7D1E4" stroke-width="1.2"/>' +
+    arm(-1,false) + arm(1,true) +
+    '<path d="M42 62 L50 72 L58 62 L55 59 L50 64 L45 59 Z" fill="#fff" stroke="#DDE4F0" stroke-width="1"/>' +
+    '<polygon points="47.6,66 52.4,66 51.6,72 50,86 48.4,72" ' + F('red') + '/><polygon points="47.4,65 52.6,65 53.4,69 46.6,69" ' + F('redD') + '/>' +
+    '<ellipse cx="27" cy="45" rx="5" ry="6" ' + F('skin') + '/><ellipse cx="73" cy="45" rx="5" ry="6" ' + F('skin') + '/>' +
+    '<ellipse cx="50" cy="26" rx="26" ry="20" ' + F('hair') + '/>' +
+    '<ellipse cx="50" cy="42" rx="23" ry="22" ' + F('skin') + '/>' +
+    '<path d="M26 40 Q27 14 50 13 Q73 14 74 40 Q66 25 50 28 Q34 25 26 40 Z" ' + F('hair') + '/>' +
+    GL(38,18,9,3.6,-22) +
+    kidFace(50, 46, 8.2) +
+    '',
+    130);
+
+
+  /* variasi murid: warna kulit dan rambut berbeda */
+  GR.skinB = ['#FFEAD8','#FAD0A8','#E2AB7C'];
+  GR.skinC = ['#EDBE92','#CE905C','#A06836'];
+  GR.skinD = ['#D29868','#A5703F','#74482A'];
+  GR.hairB = ['#8A5A38','#563018','#2C170B'];
+  GR.hairC = ['#4A4A52','#1C1C22','#050507'];
+  function kidVar(str, sk, hr, hex){
+    return str.replace(/g_skin\)/g, 'g_' + sk + ')').replace(/g_hair\)/g, 'g_' + hr + ')').replace(/#F4BC8C/g, hex);
+  }
+  ART.crowd = [
+    ART.boy,
+    kidVar(ART.girl,'skinB','hair','#F8CEA6'),
+    kidVar(ART.boy,'skinC','hairB','#D39A66'),
+    kidVar(ART.girl,'skinD','hair','#B77F52'),
+    kidVar(ART.boy,'skinB','hairC','#F8CEA6'),
+    kidVar(ART.girl,'skinC','hair','#D39A66'),
+    kidVar(ART.boy,'skinD','hairC','#B77F52'),
+    ART.girl
+  ];
+
+  function crate(e){
+    return [S(ART.crateBack,50,55,38,null,1), S(e,50,48,15,null,2), S(ART.crateFront,50,66,38,'kotak',3)];
+  }
+
+  var SC = {
+    atas:   [S(ART.tree,50,62,30,'pohon',1), S(ART.bird,50,20,18,'burung',2)],
+    bawah:  [S(ART.chair,50,34,28,'kursi',1), S(ART.ball,50,76,14,'bola',2)],
+    kiri:   [S(ART.cat,22,56,24,'kucing',1), S(ART.house,66,50,38,'rumah',1)],
+    kanan:  [S(ART.house,32,50,38,'rumah',1), S(ART.dog,78,56,24,'anjing',1)],
+    depan:  [S(ART.tree,46,46,34,null,1), S(ART.rabbit,62,68,28,null,2)],
+    belakangMateri: [S(ART.house,54,44,36,null,1), S(ART.car,40,72,28,null,2)],
+    dalam:  crate(ART.apple),
+    antara: [S(ART.cat,18,54,26,'kucing',1), S(ART.dog,50,54,26,'anjing',1), S(ART.rabbit,82,54,26,'kelinci',1)]
+  };
+
+  var M = [
+    {k:'di atas', sc:SC.atas, s:'Burung ada <b>di atas</b> pohon.', tip:'Di atas berarti lebih tinggi.'},
+    {k:'di bawah', sc:SC.bawah, s:'Bola ada <b>di bawah</b> kursi.', tip:'Di bawah berarti lebih rendah.'},
+    {k:'di sebelah kiri', sc:SC.kiri, s:'Kucing ada <b>di sebelah kiri</b> rumah.', tip:'Kiri adalah sisi tangan kirimu.'},
+    {k:'di sebelah kanan', sc:SC.kanan, s:'Anjing ada <b>di sebelah kanan</b> rumah.', tip:'Kanan adalah sisi tangan kananmu.'},
+    {k:'di depan', sc:SC.depan, s:'Kelinci ada <b>di depan</b> pohon.', tip:'Di depan berarti lebih dekat denganmu.'},
+    {k:'di belakang', sc:SC.belakangMateri, s:'Rumah ada <b>di belakang</b> mobil.', tip:'Di belakang berarti lebih jauh darimu. Bendanya tertutup sedikit.'},
+    {k:'di dalam', sc:SC.dalam, s:'Apel ada <b>di dalam</b> kotak.', tip:'Di dalam berarti ada di bagian isi benda.'},
+    {k:'di antara', sc:SC.antara, s:'Anjing ada <b>di antara</b> kucing dan kelinci.', tip:'Di antara berarti ada di tengah. Di kiri dan kanannya ada benda lain.'}
+  ];
+
+  var Q = [
+    {type:'pg', sc:SC.atas, t:'Burung berada __ pohon.', o:['di atas','di bawah','di dalam'], a:'di atas',
+      why:'Burung lebih tinggi daripada pohon. Jadi burung berada di atas pohon.'},
+    {type:'pg', sc:SC.bawah, t:'Bola berada __ kursi.', o:['di atas','di bawah','di samping'], a:'di bawah',
+      why:'Bola lebih rendah daripada kursi. Jadi bola berada di bawah kursi.'},
+    {type:'pg', sc:SC.kiri, t:'Kucing berada di sebelah __ rumah.', o:['kiri','kanan','atas'], a:'kiri',
+      why:'Lihat gambarnya. Kucing ada di sisi kiri rumah, yaitu sisi tangan kiri.'},
+    {type:'pg', sc:SC.depan, t:'Kelinci berada __ pohon.', o:['di depan','di belakang','di dalam'], a:'di depan',
+      why:'Kelinci tampak lebih besar dan menutupi pohon. Artinya kelinci lebih dekat denganmu, yaitu di depan pohon.'},
+    {type:'pg', sc:crate(ART.ball), t:'Bola berada __ kotak.', o:['di dalam','di atas','di bawah'], a:'di dalam',
+      why:'Bola ada di bagian isi kotak. Jadi bola berada di dalam kotak.'},
+    {type:'isi', sc:[S(ART.cat,24,54,28,'kucing',1), S(ART.dog,76,54,28,'anjing',1)], t:'Anjing berada di sebelah __ kucing.', a:'kanan',
+      why:'Anjing ada di sisi tangan kanan kucing. Jadi anjing berada di sebelah kanan kucing.'},
+    {type:'isi', sc:[S(ART.boat,50,26,24,'perahu',1), S(ART.fish,50,76,12,'ikan',2)], bg:'sea', t:'Ikan berada di __ perahu.', a:'bawah',
+      why:'Ikan lebih rendah daripada perahu. Jadi ikan berada di bawah perahu.'},
+    {type:'isi', sc:[S(ART.tree,46,46,34,null,1), S(ART.dog,62,68,28,null,2)], t:'Pohon berada di __ anjing.', a:'belakang',
+      why:'Anjing tampak lebih dekat denganmu dan menutupi pohon. Jadi pohon berada di belakang anjing.'},
+    {type:'isi', sc:SC.antara, t:'Anjing berada di __ kucing dan kelinci.', a:'antara',
+      why:'Kucing ada di kiri anjing dan kelinci ada di kanan anjing. Jadi anjing berada di antara keduanya.'},
+    {type:'isi', sc:[S(ART.mountain,50,62,30,'gunung',1), S(ART.cloud,50,20,18,'awan',2)], t:'Awan berada di __ gunung.', a:'atas',
+      why:'Awan lebih tinggi daripada gunung. Jadi awan berada di atas gunung.'}
+  ];
+  var BANK = ['atas','bawah','kiri','kanan','depan','belakang','dalam','antara'];
+  var PRAISE = ['Hebat','Pintar sekali','Keren','Mantap','Luar biasa'];
+  var MOT = ['Tidak apa-apa. Salah itu bagian dari belajar.','Ayo semangat! Kamu pasti bisa di soal berikutnya.','Terus mencoba ya, kamu sedang makin pintar.','Jangan menyerah. Perhatikan gambarnya pelan-pelan.'];
+
+  var ROUNDS = [
+    {k:'taruh', o:ART.ball, n:'Bola', t:'atas', txt:'Letakkan <b>bola</b> <b>di atas</b> meja.'},
+    {k:'taruh', o:ART.cat, n:'Kucing', t:'bawah', txt:'Letakkan <b>kucing</b> <b>di bawah</b> meja.'},
+    {k:'taruh', o:ART.apple, n:'Apel', t:'kanan', txt:'Letakkan <b>apel</b> <b>di sebelah kanan</b> meja.'},
+    {k:'taruh', o:ART.book, n:'Buku', t:'kiri', txt:'Letakkan <b>buku</b> <b>di sebelah kiri</b> meja.'},
+    {k:'taruh', o:ART.teddy, n:'Boneka', t:'atas', txt:'Letakkan <b>boneka</b> <b>di atas</b> meja.'},
+    {k:'taruh', o:ART.chick, n:'Anak ayam', t:'bawah', txt:'Letakkan <b>anak ayam</b> <b>di bawah</b> meja.'},
+    {k:'tebak', txt:'Benda apa yang ada <b>di atas</b> meja?', a:'ball',
+      opts:[['ball','Bola'],['teddy','Boneka'],['gift','Kado']],
+      hint:'Cari benda yang diletakkan di atas permukaan meja.', ok:'Bola ada di atas meja.'},
+    {k:'tebak', txt:'Siapa yang ada <b>di bawah</b> meja?', a:'teddy',
+      opts:[['chick','Anak ayam'],['ball','Bola'],['teddy','Boneka']],
+      hint:'Di bawah berarti lebih rendah. Lihat yang berada di antara kaki meja.', ok:'Boneka beruang ada di bawah meja.'},
+    {k:'tebak', txt:'Siapa yang ada <b>di sebelah kiri</b> meja?', a:'chick',
+      opts:[['gift','Kado'],['chick','Anak ayam'],['teddy','Boneka']],
+      hint:'Kiri adalah sisi tangan kirimu. Lihat sisi kiri meja.', ok:'Anak ayam ada di sebelah kiri meja.'},
+    {k:'tebak', txt:'Benda apa yang ada <b>di sebelah kanan</b> meja?', a:'gift',
+      opts:[['ball','Bola'],['chick','Anak ayam'],['gift','Kado']],
+      hint:'Kanan adalah sisi tangan kananmu. Lihat sisi kanan meja.', ok:'Kado ada di sebelah kanan meja.'}
+  ];
+  var ZP = {atas:[50,30], bawah:[50,60], kiri:[14,62], kanan:[86,62]};
+  var START = [91,88];
+  var LBL = {atas:'di atas', bawah:'di bawah', kiri:'di sebelah kiri', kanan:'di sebelah kanan'};
+  var HINT = {
+    atas:'Atas berarti lebih tinggi daripada meja.',
+    bawah:'Bawah berarti lebih rendah, di antara kaki meja.',
+    kiri:'Kiri adalah sisi tangan kirimu.',
+    kanan:'Kanan adalah sisi tangan kananmu.'
+  };
+  var PARTY = [
+    S(ART.bunting,50,9,100,null,1),
+    S(ART.balloonR,7,32,13,null,1), S(ART.balloonY,17,26,11,null,1),
+    S(ART.balloonB,93,32,13,null,1), S(ART.balloonP,83,26,11,null,1),
+    S(ART.table,50,52,46,null,2)
+  ];
+  var PARTY_TEBAK = PARTY.concat([
+    S(ART.ball,50,32,13,null,3), S(ART.teddy,50,61,12,null,3),
+    S(ART.chick,14,62,12,null,3), S(ART.gift,87,62,14,null,3)
+  ]);
+  var STEPS = ['Mulai','Tujuan','Materi','Main','Kuis','Hasil'];
+
+  var st = {
+    slide:0, name:'', mat:0,
+    act:{i:0, ok:false, t:null},
+    quiz:{i:0, res:new Array(10).fill(null)},
+    feel:null, checks:[false,false,false]
+  };
+  var nm = function(){ return esc((st.name || '').trim() || 'Teman'); };
+
+  /* ---------- tampilan ---------- */
+  function crowdKid(ix, i, flip, extra){
+    return '<div class="kid' + (flip ? ' flip' : '') + (extra || '') + '" style="animation-delay:' + (i*0.21).toFixed(2) + 's;--d:' + (i*0.19).toFixed(2) + 's">' + ART.crowd[ix] + '</div>';
+  }
+  function crowdHtml(){
+    var back = [7,3,5,1,2,4].map(function(ix,i){ return crowdKid(ix, i+3, i % 2 === 0); }).join('');
+    var front = [0,1,2,3,4,5,6].map(function(ix,i){ return crowdKid(ix, i, i % 3 === 1); }).join('');
+    return '<div class="crowd" aria-hidden="true"><div class="crow back">' + back + '</div><div class="crow front">' + front + '</div></div>';
+  }
+  function kidPair(t1, t2, jump){
+    var j = jump ? ' jump' : '';
+    return '<div class="kidpair" aria-hidden="true">' +
+      '<div class="kc"><span class="bub">' + t1 + '</span><div class="kid' + j + '">' + ART.boy + '</div></div>' +
+      '<div class="kc"><span class="bub">' + t2 + '</span><div class="kid late' + j + '">' + ART.girl + '</div></div>' +
+    '</div>';
+  }
+  var BLK_COLORS = ['var(--blue)','var(--coral)','var(--sun)','var(--green)','var(--purple)'];
+  var BLK_ROT = [-5,4,-3,6,-4,3];
+  function word(w, off){
+    return '<span class="word" aria-hidden="true">' + w.split('').map(function(ch,i){
+      var n = off + i;
+      return '<span class="blk" style="--c:' + BLK_COLORS[n % 5] + ';--r:' + BLK_ROT[n % 6] + 'deg;--n:' + n + '">' + ch + '</span>';
+    }).join('') + '</span>';
+  }
+
+  function coverView(){
+    return '<section class="slide cover">' +
+      '<i class="flt" aria-hidden="true" style="top:10px;left:6px">' + ART.balloonR + '</i>' +
+      '<i class="flt" aria-hidden="true" style="top:10px;right:6px;animation-delay:.8s">' + ART.balloonB + '</i>' +
+      '<i class="twk" aria-hidden="true" style="top:128px;left:10px;animation-delay:1.1s">✨</i>' +
+      '<i class="twk" aria-hidden="true" style="top:120px;right:12px;animation-delay:.3s">⭐</i>' +
+      '<h1 aria-label="Ayo Belajar Posisi Benda"><span class="ribbon" aria-hidden="true">Ayo Belajar</span>' + word('POSISI', 0) + word('BENDA', 6) + '</h1>' +
+      '<div class="mascots" aria-hidden="true">' +
+        '<div class="mc"><span class="bub">Aku di kiri rumah!</span><span class="em2">' + ART.cat + '</span></div>' +
+        '<div class="mc"><span class="em2">' + ART.house + '</span></div>' +
+        '<div class="mc"><span class="bub">Aku di kanan rumah!</span><span class="em2">' + ART.dog + '</span></div>' +
+      '</div>' +
+      '<span class="tag">Matematika · Kelas 2 SD · Fase A</span>' +
+      '<p class="lead">Yuk, cari tahu di mana sebuah benda berada, dilihat dari benda lain!</p>' +
+      '<div class="ident">' +
+        '<div><small>📚 Mata pelajaran</small>Matematika</div>' +
+        '<div><small>🏫 Kelas / Fase</small>2 SD / Fase A</div>' +
+        '<div><small>🧩 Materi</small>Posisi benda</div>' +
+        '<div><small>🔎 Topik</small>Posisi benda terhadap benda lain</div>' +
+      '</div>' +
+      '<div class="field"><label for="nm">✏️ Siapa namamu?</label><input id="nm" type="text" maxlength="30" autocomplete="off" placeholder="Ketik namamu" value="' + esc(st.name) + '"></div>' +
+      '<div class="row"><button class="btn sun go" type="button" data-act="go" data-i="1">Mulai Belajar ▶</button></div>' +
+      '<p class="crowdtxt">Teman-teman kelas 2 menunggumu! 👋</p>' +
+      crowdHtml() +
+    '</section>';
+  }
+
+  function goalView(){
+    return '<section class="slide">' +
+      '<h2>Tujuan Belajar</h2>' +
+      '<p class="big">Hai, ' + nm() + '! Hari ini kamu akan memahami posisi benda satu terhadap benda lainnya.</p>' +
+      '<div class="goals">' +
+        '<div class="goal" style="--c:var(--blue)"><span class="ic">⬆️</span><h3>Atas dan bawah</h3><p>Mana yang lebih tinggi dan mana yang lebih rendah.</p></div>' +
+        '<div class="goal" style="--c:var(--green)"><span class="ic">↔️</span><h3>Kiri dan kanan</h3><p>Benda di sisi tangan kiri dan tangan kanan.</p></div>' +
+        '<div class="goal" style="--c:var(--purple)"><span class="ic">📦</span><h3>Depan, belakang, dalam, antara</h3><p>Dekat, jauh, di isi benda, dan di tengah.</p></div>' +
+      '</div>' +
+      kidPair('Aku mau tahu mana yang di atas dan di bawah!', 'Aku mau belajar kiri dan kanan!') +
+    '</section>';
+  }
+
+  function matView(){
+    var m = M[st.mat];
+    return '<section class="slide">' +
+      '<h2>Mengenal Posisi Benda</h2>' +
+      '<p class="lead">Ketuk kata posisi, lalu lihat gambarnya.</p>' +
+      '<div class="chips">' + M.map(function(x,i){
+        return '<button class="chip ' + (i===st.mat?'on':'') + '" type="button" data-act="mat" data-i="' + i + '">' + x.k + '</button>';
+      }).join('') + '</div>' +
+      scene(m.sc) +
+      '<p class="sentence">' + m.s + '</p>' +
+      '<p class="tip">Ingat: ' + m.tip + '</p>' +
+    '</section>';
+  }
+
+  function actView(){
+    var A = st.act, total = ROUNDS.length;
+    if(A.i >= total){
+      return '<section class="slide"><h2>Ayo Bermain!</h2>' +
+        scene(PARTY_TEBAK, 'party') +
+        '<div class="fb ok"><b>Hebat, ' + nm() + '! Kamu sudah menyelesaikan semua ronde. 🎉</b><p>Kamu sudah bisa menaruh dan menebak benda di atas, di bawah, di kiri, dan di kanan meja.</p></div>' +
+        '<div class="row"><button class="btn alt" type="button" data-act="actreset">Main lagi</button><button class="btn sun" type="button" data-act="go" data-i="4">Ke Kuis ▶</button></div></section>';
+    }
+    var R = ROUNDS[A.i];
+    var part = R.k === 'taruh' ? 'Bagian 1 · Taruh Benda' : 'Bagian 2 · Tebak Gambar';
+    var head = '<h2>Ayo Bermain!</h2>' +
+      '<div class="qhead"><span class="tag">' + part + '</span><span class="tag">Ronde ' + (A.i+1) + ' dari ' + total + '</span></div>' +
+      '<div class="bar" aria-hidden="true"><i style="width:' + (A.i / total * 100) + '%"></i></div>' +
+      '<p class="cmd">' + R.txt + '</p>';
+    if(R.k === 'taruh'){
+      var zones = Object.keys(ZP).map(function(z){
+        return '<button class="zone" type="button" data-act="zone" data-z="' + z + '" style="left:' + ZP[z][0] + '%;top:' + ZP[z][1] + '%" aria-label="Letakkan ' + LBL[z] + ' meja">?</button>';
+      }).join('');
+      var mover = '<div id="mover" class="it mover" style="left:' + START[0] + '%;top:' + START[1] + '%;--s:12;z-index:5"><span class="em">' + R.o + '</span></div>';
+      return '<section class="slide" id="actSlide">' + head +
+        scene(PARTY, 'party', zones + mover) +
+        '<div id="actMsg" class="fb hint">Ketuk lingkaran bertanda ? untuk meletakkan ' + R.n.toLowerCase() + '.</div>' +
+        '<div class="row"><button id="actNext" class="btn sun" type="button" data-act="actnext" hidden>Ronde berikutnya ▶</button></div>' +
+      '</section>';
+    }
+    return '<section class="slide" id="actSlide">' + head +
+      scene(PARTY_TEBAK, 'party') +
+      '<div class="pickrow">' + R.opts.map(function(o){
+        return '<button class="pickbtn" type="button" data-act="pick" data-v="' + o[0] + '" aria-label="' + o[1] + '"><span class="pe">' + ART[o[0]] + '</span><span>' + o[1] + '</span></button>';
+      }).join('') + '</div>' +
+      '<div id="actMsg" class="fb hint">Lihat gambarnya baik-baik, lalu ketuk jawabanmu.</div>' +
+      '<div class="row"><button id="actNext" class="btn sun" type="button" data-act="actnext" hidden>' + (A.i === total-1 ? 'Selesai' : 'Ronde berikutnya') + ' ▶</button></div>' +
+    '</section>';
+  }
+
+  function quizView(){
+    var i = st.quiz.i, q = Q[i], r = st.quiz.res[i];
+    var shown = r ? (q.type === 'pg' ? r.val : (r.val || '…')) : '_____';
+    var sentence = q.t.replace('__', '<span class="blank ' + (r ? (r.ok ? 'ok' : 'no') : '') + '">' + esc(shown) + '</span>');
+    var body;
+    if(q.type === 'pg'){
+      body = '<div class="opts">' + q.o.map(function(o){
+        var cls = r ? (o === q.a ? 'ok' : (o === r.val ? 'no' : '')) : '';
+        return '<button class="opt ' + cls + '" type="button" data-act="opt" data-v="' + o + '"' + (r ? ' disabled' : '') + '>' + o + '</button>';
+      }).join('') + '</div>';
+    } else {
+      body = '<div class="field"><label for="ans">Ketik kata yang tepat, atau ketuk kata di bawah.</label>' +
+        '<input id="ans" class="ans" type="text" autocomplete="off" autocapitalize="none" placeholder="Jawabanmu" value="' + (r ? esc(r.val) : '') + '"' + (r ? ' disabled' : '') + '></div>' +
+        '<div class="chips">' + BANK.map(function(b){
+          return '<button class="chip" type="button" data-act="chip" data-v="' + b + '"' + (r ? ' disabled' : '') + '>' + b + '</button>';
+        }).join('') + '</div>' +
+        (r ? '' : '<div class="row"><button class="btn" type="button" data-act="check">Periksa Jawaban</button></div>');
+    }
+    var fb = '';
+    if(r){
+      if(r.ok){
+        fb = '<div class="fb ok"><b>' + PRAISE[i % PRAISE.length] + ', ' + nm() + '! Jawabanmu benar. 🌟</b><p>Satu bintang untukmu.</p></div>';
+      } else {
+        fb = '<div class="fb no"><b>Belum tepat.</b><p>Jawaban yang benar: <strong>' + q.a + '</strong>.</p><p>' + q.why + '</p><p class="mot">' + MOT[i % MOT.length] + ' 💪</p></div>';
+      }
+      fb += '<div class="row"><button class="btn sun" type="button" data-act="qnext">' + (i === Q.length-1 ? 'Lihat Hasil' : 'Soal berikutnya') + ' ▶</button></div>';
+    }
+    return '<section class="slide">' +
+      '<div class="qhead"><h2>Kuis Posisi Benda</h2><span class="tag">Soal ' + (i+1) + ' dari ' + Q.length + ' · ' + (q.type === 'pg' ? 'Pilihan ganda' : 'Isian') + '</span></div>' +
+      '<div class="bar" aria-hidden="true"><i style="width:' + (st.quiz.res.filter(Boolean).length / Q.length * 100) + '%"></i></div>' +
+      scene(q.sc, q.bg) +
+      '<p class="sentence">' + sentence + '</p>' +
+      body + fb +
+    '</section>';
+  }
+
+  function resultView(){
+    var res = st.quiz.res;
+    if(res.some(function(r){ return !r; })){
+      return '<section class="slide"><h2>Hasil Belajar</h2><p class="lead">Selesaikan dulu kuisnya ya, ' + nm() + '. Setelah itu hasilmu muncul di sini.</p>' +
+        '<div class="row"><button class="btn" type="button" data-act="go" data-i="4">Ke Kuis ▶</button></div></section>';
+    }
+    var ok = res.filter(function(r){ return r.ok; }).length;
+    var score = ok * 10;
+    var stars = Math.round(score / 20);
+    var msg, again = '';
+    if(score >= 80){ msg = 'Luar biasa, ' + nm() + '! Kamu sudah paham posisi benda terhadap benda lain.'; }
+    else if(score >= 50){ msg = 'Bagus, ' + nm() + '! Tinggal sedikit lagi. Lihat kembali soal yang belum tepat, lalu coba lagi.'; }
+    else { msg = 'Terima kasih sudah mencoba, ' + nm() + '. Yuk baca materinya sekali lagi. Kamu pasti bisa!'; again = '<button class="btn alt" type="button" data-act="go" data-i="2">Baca Materi Lagi</button>'; }
+    var feelData = [
+      {e:'😀', t:'Aku sudah paham', r:'Hebat! Coba cari benda di rumah dan ceritakan posisinya kepada temanmu.'},
+      {e:'🙂', t:'Aku mulai paham', r:'Bagus! Latihan sedikit lagi, kamu pasti makin lancar.'},
+      {e:'🤔', t:'Aku masih bingung', r:'Tidak apa-apa. Tanyakan kepada gurumu atau main lagi di bagian Ayo Bermain.'}
+    ];
+    var checks = ['Aku bisa menunjuk benda di atas dan di bawah.','Aku bisa membedakan kiri dan kanan.','Aku bisa bilang benda di depan, di belakang, di dalam, dan di antara.'];
+    return '<section class="slide">' +
+      '<h2>Hasil Belajarmu</h2>' +
+      '<div class="score"><span class="num">' + score + '</span><div><div class="stars" aria-label="' + stars + ' dari 5 bintang">' + '⭐'.repeat(stars) + '☆'.repeat(5-stars) + '</div><p>' + ok + ' dari 10 soal benar</p></div></div>' +
+      '<p class="big">' + msg + '</p>' +
+      (score >= 80 ? kidPair('Hore! Kamu hebat, ' + nm() + '!', 'Selamat ya! Kamu sudah paham!', true) : kidPair('Semangat ya, ' + nm() + '!', 'Ayo kita coba lagi!', false)) +
+      '<div class="dots" aria-label="Rincian jawaban">' + res.map(function(r,i){ return '<span class="' + (r.ok ? 'y' : 'n') + '">' + (i+1) + (r.ok ? '✓' : '✗') + '</span>'; }).join('') + '</div>' +
+      '<h3>Ayo Berefleksi</h3>' +
+      '<p class="lead">Bagaimana perasaanmu setelah belajar hari ini?</p>' +
+      '<div class="feel">' + feelData.map(function(f,i){
+        return '<button type="button" class="' + (st.feel === i ? 'on' : '') + '" data-act="feel" data-i="' + i + '"><span class="e">' + f.e + '</span>' + f.t + '</button>';
+      }).join('') + '</div>' +
+      (st.feel !== null ? '<div class="fb ok"><b>' + feelData[st.feel].r + '</b></div>' : '') +
+      '<p class="lead">Centang yang sudah bisa kamu lakukan:</p>' +
+      '<div class="checks">' + checks.map(function(c,i){
+        return '<button type="button" class="' + (st.checks[i] ? 'on' : '') + '" data-act="check3" data-i="' + i + '"><span class="bx">' + (st.checks[i] ? '✓' : '') + '</span>' + c + '</button>';
+      }).join('') + '</div>' +
+      '<div class="row">' + again + '<button class="btn sun" type="button" data-act="quizreset">Ulangi Kuis</button></div>' +
+    '</section>';
+  }
+
+  var VIEWS = [coverView, goalView, matView, actView, quizView, resultView];
+
+  function render(){
+    $('#stage').setAttribute('data-m', st.slide);
+    $('#stage').innerHTML = VIEWS[st.slide]();
+    $('#steps').innerHTML = STEPS.map(function(s,i){
+      var cls = i === st.slide ? 'on' : (i < st.slide ? 'done' : '');
+      return '<button type="button" class="' + cls + '" data-act="go" data-i="' + i + '"' + (i === st.slide ? ' aria-current="step"' : '') + '>' + s + '</button>';
+    }).join('');
+    $('#prev').hidden = st.slide === 0;
+    var nx = $('#next');
+    nx.hidden = st.slide === 0 || st.slide >= 4;
+    nx.textContent = st.slide === 3 ? 'Ke Kuis ▶' : 'Lanjut ▶';
+  }
+  function go(n){
+    st.slide = Math.max(0, Math.min(VIEWS.length-1, n));
+    render();
+    window.scrollTo({top:0, behavior: reduce ? 'auto' : 'smooth'});
+  }
+
+  function burst(el){
+    Music.sfx(true);
+    if(reduce || !el) return;
+    var r = el.getBoundingClientRect();
+    var icons = ['⭐','✨','🎉'];
+    for(var i = 0; i < 10; i++){
+      var s = document.createElement('span');
+      s.className = 'spark';
+      s.textContent = icons[i % 3];
+      s.style.left = (r.left + r.width/2) + 'px';
+      s.style.top = (r.top + r.height/2) + 'px';
+      s.style.setProperty('--dx', (Math.random()*180 - 90) + 'px');
+      s.style.setProperty('--dy', (-50 - Math.random()*110) + 'px');
+      document.body.appendChild(s);
+      setTimeout((function(n){ return function(){ n.remove(); }; })(s), 950);
+    }
+  }
+
+  function norm(v){ return String(v).toLowerCase().trim().replace(/\s+/g,' ').replace(/^di\s+/,'').replace(/^sebelah\s+/,''); }
+
+  function answer(v){
+    var i = st.quiz.i, q = Q[i];
+    if(st.quiz.res[i]) return;
+    var ok = q.type === 'pg' ? v === q.a : norm(v) === q.a;
+    st.quiz.res[i] = {ok:ok, val:v};
+    render();
+    if(ok){ var b = document.querySelector('.fb.ok'); burst(b); } else { Music.sfx(false); }
+  }
+
+  /* ---------- aksi ---------- */
+  var A = {
+    go: function(b){ go(+b.dataset.i); },
+    mat: function(b){ st.mat = +b.dataset.i; render(); },
+    zone: function(b){
+      var a = st.act; if(a.ok) return;
+      var R = ROUNDS[a.i], z = b.dataset.z, p = ZP[z];
+      var mv = $('#mover'), msg = $('#actMsg');
+      mv.style.left = p[0] + '%'; mv.style.top = p[1] + '%';
+      clearTimeout(a.t);
+      if(z === R.t){
+        a.ok = true;
+        msg.className = 'fb ok';
+        msg.innerHTML = '<b>' + PRAISE[a.i % PRAISE.length] + ', ' + nm() + '! ' + R.n + ' berada ' + LBL[z] + ' meja. 🌟</b>';
+        $('#actNext').hidden = false;
+        $('#actSlide').classList.add('locked');
+        burst(mv);
+      } else {
+        Music.sfx(false);
+        msg.className = 'fb no';
+        msg.innerHTML = '<b>Belum tepat.</b><p>' + HINT[R.t] + ' Coba lagi ya!</p>';
+        a.t = setTimeout(function(){ mv.style.left = START[0] + '%'; mv.style.top = START[1] + '%'; }, 1000);
+      }
+    },
+    actnext: function(){ st.act.i++; st.act.ok = false; render(); },
+    actreset: function(){ st.act = {i:0, ok:false, t:null}; render(); },
+    pick: function(b){
+      var a = st.act; if(a.ok) return;
+      var R = ROUNDS[a.i], v = b.dataset.v, msg = $('#actMsg');
+      if(v === R.a){
+        a.ok = true;
+        b.classList.add('ok');
+        document.querySelectorAll('.pickbtn').forEach(function(x){ x.disabled = true; });
+        msg.className = 'fb ok';
+        msg.innerHTML = '<b>' + PRAISE[a.i % PRAISE.length] + ', ' + nm() + '! ' + R.ok + ' 🌟</b>';
+        $('#actNext').hidden = false;
+        burst(b);
+      } else {
+        b.classList.add('no'); b.disabled = true; Music.sfx(false);
+        msg.className = 'fb no';
+        msg.innerHTML = '<b>Belum tepat.</b><p>' + R.hint + ' Coba lagi ya!</p>';
+      }
+    },
+    opt: function(b){ answer(b.dataset.v); },
+    chip: function(b){ var inp = $('#ans'); if(inp && !inp.disabled){ inp.value = b.dataset.v; inp.focus(); } },
+    check: function(){
+      var inp = $('#ans'); var v = inp ? inp.value.trim() : '';
+      if(!v){ if(inp) inp.focus(); return; }
+      answer(v);
+    },
+    qnext: function(){
+      if(st.quiz.i === Q.length - 1){ go(5); } else { st.quiz.i++; render(); window.scrollTo({top:0, behavior: reduce ? 'auto' : 'smooth'}); }
+    },
+    quizreset: function(){ st.quiz = {i:0, res:new Array(10).fill(null)}; st.feel = null; st.checks = [false,false,false]; go(4); },
+    feel: function(b){ st.feel = +b.dataset.i; render(); },
+    check3: function(b){ var i = +b.dataset.i; st.checks[i] = !st.checks[i]; render(); }
+  };
+
+  document.addEventListener('click', function(e){
+    var b = e.target.closest('[data-act]');
+    if(b && A[b.dataset.act]) A[b.dataset.act](b);
+  });
+  document.addEventListener('input', function(e){ if(e.target.id === 'nm') st.name = e.target.value; });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' && e.target.id === 'ans'){ A.check(); }
+    if(e.key === 'Enter' && e.target.id === 'nm'){ go(1); }
+  });
+  $('#prev').addEventListener('click', function(){ go(st.slide - 1); });
+  $('#next').addEventListener('click', function(){ go(st.slide + 1); });
+
+  document.body.insertAdjacentHTML('afterbegin', defsSvg());
+  Music.init();
+  [['kidL',[0,2]],['kidR',[1,3]],['kidF1',[0]],['kidF2',[3]],['kidF3',[4]],['kidF4',[5]]].forEach(function(k){
+    var el = document.getElementById(k[0]); if(!el) return;
+    el.innerHTML = k[1].map(function(ix, n){
+      return '<div class="kid' + (n % 2 ? ' late' : '') + '" style="--d:' + (ix*0.17).toFixed(2) + 's">' + ART.crowd[ix] + '</div>';
+    }).join('');
+  });
+  render();
+})();
+</script>
+
+</body></html>
